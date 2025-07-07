@@ -1,191 +1,152 @@
+import { GoogleGenerativeAI } from "@google/generative-ai"
 import { type NextRequest, NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase-server"
-import { cache } from "@/lib/cache"
+import { createServerClient } from "@supabase/ssr"
+import { cookies } from "next/headers"
 
-// Types pour une meilleure gestion des erreurs
-interface APIError {
-  code: string
-  message: string
-  details?: any
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
+
+// Configuration pour le modèle gratuit
+const MODEL_CONFIG = {
+  model: "gemini-1.5-flash", // Modèle gratuit avec quotas plus élevés
+  generationConfig: {
+    temperature: 0.7,
+    topK: 40,
+    topP: 0.95,
+    maxOutputTokens: 2048,
+  },
+  safetySettings: [
+    {
+      category: "HARM_CATEGORY_HARASSMENT",
+      threshold: "BLOCK_MEDIUM_AND_ABOVE",
+    },
+    {
+      category: "HARM_CATEGORY_HATE_SPEECH",
+      threshold: "BLOCK_MEDIUM_AND_ABOVE",
+    },
+    {
+      category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+      threshold: "BLOCK_MEDIUM_AND_ABOVE",
+    },
+    {
+      category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+      threshold: "BLOCK_MEDIUM_AND_ABOVE",
+    },
+  ],
 }
 
-interface ChatResponse {
-  message: string
-  sources: string[]
-  confidence?: number
-  suggestions?: string[]
-  metadata?: {
-    responseTime: number
-    model: string
-    tokens?: number
+const SYSTEM_PROMPT = `Tu es DocIA, un assistant médical intelligent du Douala General Hospital au Cameroun. 
+
+INSTRUCTIONS IMPORTANTES :
+- Tu fournis des informations médicales générales et éducatives
+- Tu ne remplaces JAMAIS un médecin ou un diagnostic médical professionnel
+- Tu recommandes toujours de consulter un professionnel de santé pour des problèmes sérieux
+- Tu peux analyser des documents médicaux, images et symptômes décrits
+- Tu réponds en français de manière claire et empathique
+- Tu utilises tes connaissances médicales pour donner des conseils préventifs
+- En cas d'urgence, tu recommandes immédiatement de contacter les services d'urgence
+
+CONTEXTE MÉDICAL :
+- Hôpital : Douala General Hospital, Cameroun
+- Spécialités : Médecine générale, cardiologie, neurologie, pédiatrie
+- Protocoles : Standards internationaux adaptés au contexte africain
+
+Réponds de manière professionnelle, bienveillante et informative.`
+
+async function convertFileToBase64(file: File): Promise<string> {
+  const bytes = await file.arrayBuffer()
+  const buffer = Buffer.from(bytes)
+  return buffer.toString("base64")
+}
+
+async function processFileForGemini(file: File) {
+  const base64Data = await convertFileToBase64(file)
+
+  return {
+    inlineData: {
+      data: base64Data,
+      mimeType: file.type,
+    },
   }
 }
 
-// Fonction pour appeler l'API Mistral avec retry et timeout
-async function callMistralAPIWithRetry(messages: any[], retries = 3): Promise<any> {
-  const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), 30000) // 30s timeout
-
-  for (let attempt = 1; attempt <= retries; attempt++) {
-    try {
-      const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.MISTRAL_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "mistral-large-latest",
-          messages: [
-            {
-              role: "system",
-              content: `Tu es DocIA, un assistant médical intelligent et empathique du Douala General Hospital au Cameroun.
-
-CONTEXTE MÉDICAL CAMEROUNAIS:
-- Maladies tropicales courantes : paludisme, fièvre typhoïde, dengue
-- Défis sanitaires locaux : accès aux soins, prévention, éducation sanitaire
-- Ressources limitées : optimisation des traitements disponibles
-- Diversité culturelle : respect des croyances et pratiques locales
-
-DOMAINES D'EXPERTISE ÉTENDUS:
-- Médecine générale et médecine tropicale
-- Pédiatrie et santé maternelle
-- Maladies chroniques (diabète, hypertension, VIH/SIDA)
-- Nutrition et malnutrition
-- Santé mentale et bien-être
-- Prévention et vaccination
-- Pharmacologie et interactions médicamenteuses
-- Premiers secours et urgences médicales
-
-SOURCES DE DONNÉES:
-- Base de connaissances médicales validées
-- Protocoles du Douala General Hospital
-- Recommandations OMS pour l'Afrique
-- OpenFDA pour les informations pharmaceutiques
-- Littérature médicale récente
-
-STYLE DE COMMUNICATION:
-- Empathique et rassurant
-- Langage accessible (éviter le jargon médical)
-- Culturellement sensible au contexte camerounais
-- Bilingue français/anglais selon la langue de l'utilisateur
-- Toujours inclure un avertissement de non-diagnostic
-
-STRUCTURE DE RÉPONSE:
-1. Réponse principale claire et structurée
-2. Conseils pratiques adaptés au contexte local
-3. Quand consulter un professionnel
-4. Ressources disponibles au DGH si pertinent
-5. Avertissement de non-diagnostic obligatoire
-
-GESTION DES URGENCES:
-Si l'utilisateur décrit des symptômes d'urgence, orienter immédiatement vers les services d'urgence du DGH ou composer le 15 (SAMU Cameroun).`,
-            },
-            ...messages,
-          ],
-          temperature: 0.7,
-          max_tokens: 1200,
-          top_p: 0.9,
-        }),
-        signal: controller.signal,
-      })
-
-      clearTimeout(timeoutId)
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}))
-        throw new Error(`API Mistral Error ${response.status}: ${errorData.message || "Unknown error"}`)
-      }
-
-      return await response.json()
-    } catch (error: any) {
-      if (attempt === retries) {
-        throw error
-      }
-
-      // Attendre avant de réessayer (backoff exponentiel)
-      await new Promise((resolve) => setTimeout(resolve, Math.pow(2, attempt) * 1000))
-    }
-  }
-}
-
-// Fonction enrichie pour OpenFDA avec plus de détails
-async function enrichWithHealthAPIs(query: string) {
-  const results: any = {
-    fda: null,
-    who: null,
-    dgh: null,
-  }
-
+async function callGeminiAPI(messages: any[], files: File[] = []) {
   try {
-    // Recherche OpenFDA pour les médicaments
-    if (query.toLowerCase().includes("médicament") || query.toLowerCase().includes("drug")) {
-      const fdaResponse = await fetch(
-        `https://api.fda.gov/drug/label.json?search=${encodeURIComponent(query)}&limit=3`,
-        { signal: AbortSignal.timeout(10000) },
-      )
+    const model = genAI.getGenerativeModel(MODEL_CONFIG)
 
-      if (fdaResponse.ok) {
-        const fdaData = await fdaResponse.json()
-        results.fda = fdaData.results?.[0] || null
+    // Préparer le contexte de conversation
+    const conversationHistory = messages.slice(-10) // Limiter à 10 derniers messages pour économiser les tokens
+
+    let prompt = SYSTEM_PROMPT + "\n\nHistorique de la conversation:\n"
+
+    conversationHistory.forEach((msg, index) => {
+      prompt += `${msg.role === "user" ? "Patient" : "DocIA"}: ${msg.content}\n`
+    })
+
+    const lastMessage = messages[messages.length - 1]
+    prompt += `\nNouvelle question du patient: ${lastMessage.content}`
+
+    // Préparer les parties du message (texte + fichiers)
+    const parts = [{ text: prompt }]
+
+    // Ajouter les fichiers s'il y en a
+    if (files && files.length > 0) {
+      for (const file of files) {
+        if (file.type.startsWith("image/") || file.type === "application/pdf") {
+          const filePart = await processFileForGemini(file)
+          parts.push(filePart)
+          parts.push({ text: `\nAnalyse ce document/image: ${file.name}` })
+        }
       }
     }
 
-    // Recherche dans la base de données locale DGH via Supabase
-    const supabase = createClient()
-    const { data: dghProtocols } = await supabase
-      .from("medical_protocols")
-      .select("*")
-      .ilike("keywords", `%${query.toLowerCase()}%`)
-      .limit(3)
+    const result = await model.generateContent(parts)
+    const response = await result.response
+    const text = response.text()
 
-    if (dghProtocols && dghProtocols.length > 0) {
-      results.dgh = dghProtocols
+    return {
+      success: true,
+      message: text,
+      metadata: {
+        model: "gemini-1.5-flash",
+        tokensUsed: text.length, // Approximation
+        confidence: 85,
+      },
     }
-  } catch (error) {
-    console.error("Erreur lors de l'enrichissement des données:", error)
+  } catch (error: any) {
+    console.error("Erreur Gemini API:", error)
+
+    // Gestion spécifique des erreurs de quota
+    if (error.message?.includes("quota") || error.message?.includes("429")) {
+      return {
+        success: false,
+        error: "Quota API dépassé. Veuillez patienter quelques minutes avant de réessayer.",
+        retryAfter: 60,
+      }
+    }
+
+    // Autres erreurs
+    return {
+      success: false,
+      error: error.message || "Erreur lors de la génération de la réponse",
+      retryAfter: 10,
+    }
   }
-
-  return results
-}
-
-// Fonction pour générer des suggestions de suivi
-function generateFollowUpSuggestions(userMessage: string, assistantResponse: string): string[] {
-  const suggestions: string[] = []
-  const lowerMessage = userMessage.toLowerCase()
-
-  if (lowerMessage.includes("diabète")) {
-    suggestions.push(
-      "Comment surveiller ma glycémie au quotidien ?",
-      "Quels aliments éviter en cas de diabète ?",
-      "Exercices recommandés pour les diabétiques",
-    )
-  }
-
-  if (lowerMessage.includes("hypertension") || lowerMessage.includes("tension")) {
-    suggestions.push(
-      "Comment mesurer correctement sa tension ?",
-      "Alimentation anti-hypertensive",
-      "Gestion du stress et hypertension",
-    )
-  }
-
-  if (lowerMessage.includes("médicament") || lowerMessage.includes("traitement")) {
-    suggestions.push(
-      "Que faire en cas d'oubli de médicament ?",
-      "Interactions médicamenteuses à surveiller",
-      "Comment bien conserver ses médicaments ?",
-    )
-  }
-
-  return suggestions.slice(0, 3)
 }
 
 export async function POST(request: NextRequest) {
-  const startTime = Date.now()
-
   try {
-    const supabase = createClient()
+    const cookieStore = cookies()
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          get(name: string) {
+            return cookieStore.get(name)?.value
+          },
+        },
+      },
+    )
 
     // Vérifier l'authentification
     const {
@@ -194,115 +155,66 @@ export async function POST(request: NextRequest) {
     } = await supabase.auth.getUser()
 
     if (authError || !user) {
-      return NextResponse.json(
-        { error: { code: "UNAUTHORIZED", message: "Authentification requise" } },
-        { status: 401 },
-      )
+      return NextResponse.json({ error: { message: "Non autorisé" } }, { status: 401 })
     }
 
-    const { messages, conversationId } = await request.json()
+    // Traiter la requête (FormData pour les fichiers ou JSON)
+    let messages: any[] = []
+    let conversationId = ""
+    const files: File[] = []
 
-    if (!messages || !Array.isArray(messages) || messages.length === 0) {
-      return NextResponse.json({ error: { code: "INVALID_INPUT", message: "Messages requis" } }, { status: 400 })
+    const contentType = request.headers.get("content-type")
+
+    if (contentType?.includes("multipart/form-data")) {
+      // Requête avec fichiers
+      const formData = await request.formData()
+
+      const messagesData = formData.get("messages") as string
+      messages = JSON.parse(messagesData)
+      conversationId = formData.get("conversationId") as string
+
+      // Extraire les fichiers
+      for (const [key, value] of formData.entries()) {
+        if (key.startsWith("file_") && value instanceof File) {
+          files.push(value)
+        }
+      }
+    } else {
+      // Requête JSON normale
+      const body = await request.json()
+      messages = body.messages || []
+      conversationId = body.conversationId || ""
     }
 
-    const lastMessage = messages[messages.length - 1]
-
-    // Vérifier le cache pour des réponses similaires
-    const cacheKey = `chat_${Buffer.from(lastMessage.content).toString("base64").slice(0, 50)}`
-    const cachedResponse = cache.get<ChatResponse>(cacheKey)
-
-    if (cachedResponse) {
-      return NextResponse.json({
-        ...cachedResponse,
-        metadata: {
-          ...cachedResponse.metadata,
-          cached: true,
-          responseTime: Date.now() - startTime,
-        },
-      })
+    if (!messages.length) {
+      return NextResponse.json({ error: { message: "Messages requis" } }, { status: 400 })
     }
 
-    // Enrichir avec des données externes
-    const externalData = await enrichWithHealthAPIs(lastMessage.content)
+    // Appeler l'API Gemini
+    const result = await callGeminiAPI(messages, files)
 
-    // Préparer le contexte enrichi
-    const enrichedMessages = [...messages]
-    if (externalData.fda) {
-      enrichedMessages.push({
-        role: "system",
-        content: `Informations FDA disponibles: ${JSON.stringify({
-          brand_names: externalData.fda.openfda?.brand_name || [],
-          generic_names: externalData.fda.openfda?.generic_name || [],
-          indications: externalData.fda.indications_and_usage || [],
-          warnings: externalData.fda.warnings || [],
-        })}`,
-      })
+    if (!result.success) {
+      return NextResponse.json({ error: { message: result.error } }, { status: result.retryAfter ? 429 : 500 })
     }
 
-    // Appeler Mistral AI avec retry
-    const mistralResponse = await callMistralAPIWithRetry(enrichedMessages)
-    const assistantMessage = mistralResponse.choices[0].message.content
-
-    // Générer des suggestions de suivi
-    const suggestions = generateFollowUpSuggestions(lastMessage.content, assistantMessage)
-
-    // Ajouter l'avertissement de non-diagnostic avec contexte local
-    const finalMessage = `${assistantMessage}
-
----
-
-⚠️ **AVERTISSEMENT MÉDICAL IMPORTANT**
-
-Ces informations sont fournies à titre éducatif uniquement par DocIA, l'assistant santé du Douala General Hospital. Elles ne remplacent en aucun cas :
-- Une consultation médicale avec un professionnel de santé qualifié
-- Un diagnostic médical professionnel
-- Un traitement médical prescrit par un médecin
-
-**En cas d'urgence médicale :**
-- Contactez immédiatement le service d'urgences du DGH : +237 233 42 24 69
-- Ou composez le 15 (SAMU Cameroun)
-
-**Pour une consultation :**
-- Prenez rendez-vous au Douala General Hospital
-- Consultez votre médecin traitant
-- En cas de doute, demandez toujours l'avis d'un professionnel de santé
-
-Votre santé est précieuse. Ne prenez aucun risque.`
-
-    // Calculer un score de confiance basique
-    const confidence = Math.min(95, Math.max(70, 85 + (externalData.fda ? 5 : 0) + (suggestions.length > 0 ? 5 : 0)))
-
-    const response: ChatResponse = {
-      message: finalMessage,
-      sources: ["Mistral AI", "Base médicale DocIA", ...(externalData.fda ? ["OpenFDA"] : []), "Protocoles DGH"],
-      confidence,
-      suggestions,
-      metadata: {
-        responseTime: Date.now() - startTime,
-        model: "mistral-large-latest",
-        tokens: mistralResponse.usage?.total_tokens,
-      },
-    }
-
-    // Mettre en cache la réponse
-    cache.set(cacheKey, response, 60) // Cache pendant 1 heure
-
-    // Sauvegarder dans Supabase
+    // Sauvegarder les messages en base de données
     if (conversationId) {
       try {
         // Sauvegarder le message utilisateur
+        const userMessage = messages[messages.length - 1]
         await supabase.from("messages").insert({
           conversation_id: conversationId,
-          role: "user",
-          content: lastMessage.content,
+          role: userMessage.role,
+          content: userMessage.content,
+          metadata: files.length > 0 ? { hasFiles: true, fileCount: files.length } : null,
         })
 
         // Sauvegarder la réponse de l'assistant
         await supabase.from("messages").insert({
           conversation_id: conversationId,
           role: "assistant",
-          content: finalMessage,
+          content: result.message,
+          metadata: result.metadata,
         })
 
         // Mettre à jour la conversation
@@ -310,25 +222,21 @@ Votre santé est précieuse. Ne prenez aucun risque.`
           .from("conversations")
           .update({
             updated_at: new Date().toISOString(),
-            title: lastMessage.content.slice(0, 50) + (lastMessage.content.length > 50 ? "..." : ""),
+            message_count: messages.length + 1,
           })
           .eq("id", conversationId)
       } catch (dbError) {
-        console.error("Erreur lors de la sauvegarde:", dbError)
-        // Ne pas faire échouer la requête pour une erreur de sauvegarde
+        console.error("Erreur sauvegarde DB:", dbError)
+        // Continue même si la sauvegarde échoue
       }
     }
 
-    return NextResponse.json(response)
+    return NextResponse.json({
+      message: result.message,
+      metadata: result.metadata,
+    })
   } catch (error: any) {
     console.error("Erreur API chat:", error)
-
-    const apiError: APIError = {
-      code: "INTERNAL_ERROR",
-      message: "Une erreur interne s'est produite. Veuillez réessayer.",
-      details: process.env.NODE_ENV === "development" ? error.message : undefined,
-    }
-
-    return NextResponse.json({ error: apiError }, { status: 500 })
+    return NextResponse.json({ error: { message: "Erreur interne du serveur" } }, { status: 500 })
   }
 }

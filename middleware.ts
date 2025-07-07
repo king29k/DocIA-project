@@ -25,13 +25,31 @@ export async function middleware(request: NextRequest) {
     },
   )
 
+  // Récupérer la session utilisateur
   const {
-    data: { user },
-  } = await supabase.auth.getUser()
+    data: { session },
+    error,
+  } = await supabase.auth.getSession()
 
-  if (!user && request.nextUrl.pathname.startsWith("/chat")) {
+  console.log("Middleware - Path:", request.nextUrl.pathname)
+  console.log("Middleware - Session exists:", !!session)
+  console.log("Middleware - User ID:", session?.user?.id)
+
+  // Si l'utilisateur essaie d'accéder à /chat sans être connecté
+  if (request.nextUrl.pathname.startsWith("/chat")) {
+    if (!session || error) {
+      console.log("Middleware - Redirecting to /auth (no session)")
+      const url = request.nextUrl.clone()
+      url.pathname = "/auth"
+      return NextResponse.redirect(url)
+    }
+  }
+
+  // Si l'utilisateur est connecté et essaie d'accéder à /auth
+  if (request.nextUrl.pathname.startsWith("/auth") && session && !error) {
+    console.log("Middleware - Redirecting to /chat (has session)")
     const url = request.nextUrl.clone()
-    url.pathname = "/auth"
+    url.pathname = "/chat"
     return NextResponse.redirect(url)
   }
 
@@ -39,5 +57,15 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - images (public images)
+     * - api (API routes)
+     */
+    "/((?!_next/static|_next/image|favicon.ico|images|api|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 }
