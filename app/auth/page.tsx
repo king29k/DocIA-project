@@ -296,70 +296,95 @@ export default function AuthPage() {
   // Afficher un loader pendant la vérification de session
   if (initialLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-teal-900 via-teal-800 to-teal-700 flex items-center justify-center">
-        <div className="text-center text-white">
-          <div className="relative mx-auto w-16 h-16 mb-6">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-500/20 rounded-full blur-2xl animate-pulse delay-500"></div>
+        </div>
+
+        <div className="text-center text-white relative z-10">
+          <div className="relative mx-auto w-20 h-20 mb-8">
             <div className="absolute inset-0 bg-white/20 rounded-full animate-ping"></div>
-            <div className="relative bg-white rounded-full p-4">
-              <Stethoscope className="h-8 w-8 text-teal-600" />
+            <div className="absolute inset-2 bg-white/30 rounded-full animate-ping delay-75"></div>
+            <div className="relative bg-white/90 backdrop-blur-sm rounded-full p-5 shadow-2xl">
+              <Stethoscope className="h-10 w-10 text-indigo-600" />
             </div>
           </div>
-          <p className="text-lg">Vérification de votre session...</p>
+          <p className="text-xl font-medium animate-pulse">Vérification de votre session...</p>
+          <div className="mt-4 flex justify-center space-x-1">
+            <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce"></div>
+            <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce delay-100"></div>
+            <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce delay-200"></div>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-900 via-teal-800 to-teal-700 relative overflow-hidden">
-      {/* Background decorations */}
+    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden">
+      {/* Animated background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-white/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-teal-400/5 rounded-full blur-2xl"></div>
+        <div className="absolute top-20 left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-float-delayed"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-500/10 rounded-full blur-2xl animate-pulse"></div>
+
+        {/* Floating particles */}
+        <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-white/20 rounded-full animate-float-slow"></div>
+        <div className="absolute top-3/4 left-1/4 w-1 h-1 bg-white/30 rounded-full animate-float-slow delay-1000"></div>
+        <div className="absolute top-1/2 right-1/3 w-3 h-3 bg-white/10 rounded-full animate-float-slow delay-500"></div>
       </div>
 
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-md animate-fade-in-up">
           {/* Header */}
           <div className="text-center mb-8">
-            <Link href="/" className="inline-flex items-center text-white/80 hover:text-white mb-6 transition-colors">
-              <ArrowLeft className="h-4 w-4 mr-2" />
+            <Link
+              href="/"
+              className="inline-flex items-center text-white/80 hover:text-white mb-8 transition-all duration-300 hover:scale-105 group"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2 transition-transform group-hover:-translate-x-1" />
               Retour à l'accueil
             </Link>
 
-            <div className="flex items-center justify-center space-x-4 mb-6">
-              <div className="relative">
-                <div className="absolute inset-0 bg-white/20 rounded-full animate-pulse"></div>
-                <div className="relative bg-white rounded-full p-4 shadow-2xl">
-                  <Stethoscope className="h-12 w-12 text-teal-600" />
+            <div className="flex items-center justify-center space-x-4 mb-8">
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse opacity-75"></div>
+                <div className="relative bg-white/90 backdrop-blur-sm rounded-full p-4 shadow-2xl transform transition-all duration-300 group-hover:scale-110">
+                  <Stethoscope className="h-12 w-12 text-indigo-600" />
                 </div>
               </div>
               <div className="text-left">
-                <h1 className="text-4xl font-bold text-white mb-1">DocIA</h1>
-                <p className="text-teal-200 text-sm">Assistant Santé Intelligent</p>
+                <h1 className="text-4xl font-bold text-white mb-1 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                  DocIA
+                </h1>
+                <p className="text-blue-200 text-sm font-medium">Assistant Santé Intelligent</p>
               </div>
             </div>
 
-            <p className="text-teal-100 text-lg mb-2">Bienvenue dans votre espace santé</p>
-            <p className="text-teal-200 text-sm">Connectez-vous pour accéder à votre assistant médical personnel</p>
+            <div className="space-y-2 mb-6">
+              <p className="text-white text-xl font-semibold">Bienvenue dans votre espace santé</p>
+              <p className="text-blue-200 text-sm">Connectez-vous pour accéder à votre assistant médical personnel</p>
+            </div>
 
             {/* Statut de connexion */}
-            <div className="mt-6 flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-2 mb-6">
               {connectionStatus === "checking" && (
-                <Badge variant="outline" className="bg-white/10 text-white border-white/20">
+                <Badge className="bg-white/10 backdrop-blur-sm text-white border-white/20 animate-pulse">
                   <RefreshCw className="h-3 w-3 mr-1 animate-spin" />
                   Vérification...
                 </Badge>
               )}
               {connectionStatus === "connected" && (
-                <Badge className="bg-green-500/20 text-green-100 border-green-400/30">
+                <Badge className="bg-green-500/20 backdrop-blur-sm text-green-100 border-green-400/30 animate-fade-in">
                   <Wifi className="h-3 w-3 mr-1" />
                   Connecté
                 </Badge>
               )}
               {connectionStatus === "disconnected" && (
-                <Badge variant="destructive" className="bg-red-500/20 text-red-100 border-red-400/30">
+                <Badge className="bg-red-500/20 backdrop-blur-sm text-red-100 border-red-400/30 animate-shake">
                   <WifiOff className="h-3 w-3 mr-1" />
                   Déconnecté
                 </Badge>
@@ -367,13 +392,14 @@ export default function AuthPage() {
             </div>
           </div>
 
-          <Card className="bg-white/95 backdrop-blur-xl border-0 shadow-2xl">
+          {/* Glassmorphism Card */}
+          <Card className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl animate-fade-in-up delay-200">
             <CardHeader className="text-center pb-6">
-              <CardTitle className="text-2xl text-teal-900 flex items-center justify-center gap-2">
-                <Sparkles className="h-6 w-6 text-teal-600" />
+              <CardTitle className="text-2xl text-white flex items-center justify-center gap-2">
+                <Sparkles className="h-6 w-6 text-yellow-300 animate-pulse" />
                 Accès Sécurisé
               </CardTitle>
-              <CardDescription className="text-gray-600">
+              <CardDescription className="text-blue-100">
                 Connectez-vous ou créez un compte pour commencer votre suivi médical
               </CardDescription>
             </CardHeader>
@@ -381,26 +407,32 @@ export default function AuthPage() {
             <CardContent className="space-y-6">
               {/* Messages d'erreur et de succès */}
               {error && (
-                <Alert className="border-red-200 bg-red-50">
-                  <AlertCircle className="h-4 w-4 text-red-600" />
-                  <AlertDescription className="text-red-800">{error}</AlertDescription>
+                <Alert className="border-red-300/50 bg-red-500/10 backdrop-blur-sm animate-shake">
+                  <AlertCircle className="h-4 w-4 text-red-300" />
+                  <AlertDescription className="text-red-100">{error}</AlertDescription>
                 </Alert>
               )}
 
               {success && (
-                <Alert className="border-green-200 bg-green-50">
-                  <CheckCircle className="h-4 w-4 text-green-600" />
-                  <AlertDescription className="text-green-800">{success}</AlertDescription>
+                <Alert className="border-green-300/50 bg-green-500/10 backdrop-blur-sm animate-fade-in">
+                  <CheckCircle className="h-4 w-4 text-green-300" />
+                  <AlertDescription className="text-green-100">{success}</AlertDescription>
                 </Alert>
               )}
 
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-6 bg-gray-100">
-                  <TabsTrigger value="signin" className="data-[state=active]:bg-white">
+                <TabsList className="grid w-full grid-cols-2 mb-6 bg-white/10 backdrop-blur-sm border border-white/20">
+                  <TabsTrigger
+                    value="signin"
+                    className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 transition-all duration-300"
+                  >
                     <Lock className="h-4 w-4 mr-2" />
                     Connexion
                   </TabsTrigger>
-                  <TabsTrigger value="signup" className="data-[state=active]:bg-white">
+                  <TabsTrigger
+                    value="signup"
+                    className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 transition-all duration-300"
+                  >
                     <User className="h-4 w-4 mr-2" />
                     Inscription
                   </TabsTrigger>
@@ -410,7 +442,7 @@ export default function AuthPage() {
                 <Button
                   onClick={handleGoogleSignIn}
                   disabled={loading || connectionStatus === "disconnected"}
-                  className="w-full mb-6 bg-white border-2 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 shadow-md"
+                  className="w-full mb-6 bg-white/90 backdrop-blur-sm border border-white/30 text-gray-700 hover:bg-white hover:scale-105 shadow-xl transition-all duration-300"
                   size="lg"
                 >
                   {loading ? (
@@ -440,21 +472,21 @@ export default function AuthPage() {
 
                 <div className="relative mb-6">
                   <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t border-gray-300" />
+                    <span className="w-full border-t border-white/30" />
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white px-3 text-gray-500 font-medium">Ou avec votre email</span>
+                    <span className="bg-transparent px-3 text-white/70 font-medium">Ou avec votre email</span>
                   </div>
                 </div>
 
                 <TabsContent value="signin" className="space-y-4">
                   <form onSubmit={handleEmailSignIn} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="text-gray-700 font-medium">
+                      <Label htmlFor="email" className="text-white font-medium">
                         Adresse email
                       </Label>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <div className="relative group">
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
                         <Input
                           id="email"
                           type="email"
@@ -463,17 +495,17 @@ export default function AuthPage() {
                           onChange={(e) => setEmail(e.target.value)}
                           required
                           disabled={loading}
-                          className="pl-10 h-12 border-gray-300 focus:border-teal-500 focus:ring-teal-500"
+                          className="pl-10 h-12 bg-white/10 backdrop-blur-sm border-white/30 text-white placeholder-white/50 focus:border-white/50 focus:bg-white/20 transition-all duration-300"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="password" className="text-gray-700 font-medium">
+                      <Label htmlFor="password" className="text-white font-medium">
                         Mot de passe
                       </Label>
-                      <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <div className="relative group">
+                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
                         <Input
                           id="password"
                           type={showPassword ? "text" : "password"}
@@ -482,20 +514,20 @@ export default function AuthPage() {
                           required
                           disabled={loading}
                           minLength={6}
-                          className="pl-10 pr-12 h-12 border-gray-300 focus:border-teal-500 focus:ring-teal-500"
+                          className="pl-10 pr-12 h-12 bg-white/10 backdrop-blur-sm border-white/30 text-white placeholder-white/50 focus:border-white/50 focus:bg-white/20 transition-all duration-300"
                         />
                         <Button
                           type="button"
                           variant="ghost"
                           size="sm"
-                          className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0"
+                          className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-white/10"
                           onClick={() => setShowPassword(!showPassword)}
                           disabled={loading}
                         >
                           {showPassword ? (
-                            <EyeOff className="h-4 w-4 text-gray-400" />
+                            <EyeOff className="h-4 w-4 text-white/70" />
                           ) : (
-                            <Eye className="h-4 w-4 text-gray-400" />
+                            <Eye className="h-4 w-4 text-white/70" />
                           )}
                         </Button>
                       </div>
@@ -507,22 +539,24 @@ export default function AuthPage() {
                           <Button
                             type="button"
                             variant="link"
-                            className="text-sm text-teal-600 hover:text-teal-700 p-0"
+                            className="text-sm text-blue-200 hover:text-white p-0 transition-colors"
                             disabled={loading}
                           >
                             Mot de passe oublié ?
                           </Button>
                         </DialogTrigger>
-                        <DialogContent>
+                        <DialogContent className="bg-white/10 backdrop-blur-xl border border-white/20 text-white">
                           <DialogHeader>
-                            <DialogTitle>Réinitialiser le mot de passe</DialogTitle>
-                            <DialogDescription>
+                            <DialogTitle className="text-white">Réinitialiser le mot de passe</DialogTitle>
+                            <DialogDescription className="text-white/70">
                               Entrez votre adresse email pour recevoir un lien de réinitialisation.
                             </DialogDescription>
                           </DialogHeader>
                           <div className="space-y-4">
                             <div className="space-y-2">
-                              <Label htmlFor="reset-email">Adresse email</Label>
+                              <Label htmlFor="reset-email" className="text-white">
+                                Adresse email
+                              </Label>
                               <Input
                                 id="reset-email"
                                 type="email"
@@ -530,12 +564,13 @@ export default function AuthPage() {
                                 value={resetEmail}
                                 onChange={(e) => setResetEmail(e.target.value)}
                                 required
+                                className="bg-white/10 backdrop-blur-sm border-white/30 text-white placeholder-white/50"
                               />
                             </div>
                             <Button
                               onClick={handleForgotPassword}
                               disabled={loading || !resetEmail}
-                              className="w-full bg-teal-600 hover:bg-teal-700"
+                              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
                             >
                               {loading ? (
                                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -551,7 +586,7 @@ export default function AuthPage() {
 
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white h-12 shadow-lg"
+                      className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white h-12 shadow-xl hover:scale-105 transition-all duration-300"
                       disabled={loading || connectionStatus === "disconnected"}
                     >
                       {loading ? (
@@ -567,11 +602,11 @@ export default function AuthPage() {
                 <TabsContent value="signup" className="space-y-4">
                   <form onSubmit={handleEmailSignUp} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="signup-name" className="text-gray-700 font-medium">
+                      <Label htmlFor="signup-name" className="text-white font-medium">
                         Nom complet
                       </Label>
-                      <div className="relative">
-                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <div className="relative group">
+                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
                         <Input
                           id="signup-name"
                           type="text"
@@ -580,17 +615,17 @@ export default function AuthPage() {
                           onChange={(e) => setFullName(e.target.value)}
                           required
                           disabled={loading}
-                          className="pl-10 h-12 border-gray-300 focus:border-teal-500 focus:ring-teal-500"
+                          className="pl-10 h-12 bg-white/10 backdrop-blur-sm border-white/30 text-white placeholder-white/50 focus:border-white/50 focus:bg-white/20 transition-all duration-300"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="signup-email" className="text-gray-700 font-medium">
+                      <Label htmlFor="signup-email" className="text-white font-medium">
                         Adresse email
                       </Label>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <div className="relative group">
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
                         <Input
                           id="signup-email"
                           type="email"
@@ -599,17 +634,17 @@ export default function AuthPage() {
                           onChange={(e) => setEmail(e.target.value)}
                           required
                           disabled={loading}
-                          className="pl-10 h-12 border-gray-300 focus:border-teal-500 focus:ring-teal-500"
+                          className="pl-10 h-12 bg-white/10 backdrop-blur-sm border-white/30 text-white placeholder-white/50 focus:border-white/50 focus:bg-white/20 transition-all duration-300"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="signup-password" className="text-gray-700 font-medium">
+                      <Label htmlFor="signup-password" className="text-white font-medium">
                         Mot de passe
                       </Label>
-                      <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <div className="relative group">
+                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
                         <Input
                           id="signup-password"
                           type={showPassword ? "text" : "password"}
@@ -619,31 +654,31 @@ export default function AuthPage() {
                           required
                           disabled={loading}
                           minLength={6}
-                          className="pl-10 pr-12 h-12 border-gray-300 focus:border-teal-500 focus:ring-teal-500"
+                          className="pl-10 pr-12 h-12 bg-white/10 backdrop-blur-sm border-white/30 text-white placeholder-white/50 focus:border-white/50 focus:bg-white/20 transition-all duration-300"
                         />
                         <Button
                           type="button"
                           variant="ghost"
                           size="sm"
-                          className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0"
+                          className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-white/10"
                           onClick={() => setShowPassword(!showPassword)}
                           disabled={loading}
                         >
                           {showPassword ? (
-                            <EyeOff className="h-4 w-4 text-gray-400" />
+                            <EyeOff className="h-4 w-4 text-white/70" />
                           ) : (
-                            <Eye className="h-4 w-4 text-gray-400" />
+                            <Eye className="h-4 w-4 text-white/70" />
                           )}
                         </Button>
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="confirm-password" className="text-gray-700 font-medium">
+                      <Label htmlFor="confirm-password" className="text-white font-medium">
                         Confirmer le mot de passe
                       </Label>
-                      <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <div className="relative group">
+                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
                         <Input
                           id="confirm-password"
                           type={showPassword ? "text" : "password"}
@@ -653,14 +688,14 @@ export default function AuthPage() {
                           required
                           disabled={loading}
                           minLength={6}
-                          className="pl-10 h-12 border-gray-300 focus:border-teal-500 focus:ring-teal-500"
+                          className="pl-10 h-12 bg-white/10 backdrop-blur-sm border-white/30 text-white placeholder-white/50 focus:border-white/50 focus:bg-white/20 transition-all duration-300"
                         />
                       </div>
                     </div>
 
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white h-12 shadow-lg"
+                      className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white h-12 shadow-xl hover:scale-105 transition-all duration-300"
                       disabled={loading || connectionStatus === "disconnected"}
                     >
                       {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Heart className="w-4 h-4 mr-2" />}
@@ -670,14 +705,14 @@ export default function AuthPage() {
                 </TabsContent>
               </Tabs>
 
-              <div className="mt-6 text-center text-sm text-gray-600">
+              <div className="mt-6 text-center text-sm text-white/70">
                 <p>
                   En continuant, vous acceptez nos{" "}
-                  <Link href="/terms" className="text-teal-600 hover:underline font-medium">
+                  <Link href="/terms" className="text-blue-200 hover:text-white font-medium transition-colors">
                     conditions d'utilisation
                   </Link>{" "}
                   et notre{" "}
-                  <Link href="/privacy" className="text-teal-600 hover:underline font-medium">
+                  <Link href="/privacy" className="text-blue-200 hover:text-white font-medium transition-colors">
                     politique de confidentialité
                   </Link>
                   .
@@ -688,17 +723,23 @@ export default function AuthPage() {
 
           {/* Aide */}
           <div className="mt-8 text-center space-y-3">
-            <div className="flex items-center justify-center gap-6 text-teal-200 text-sm">
-              <Link href="/support" className="hover:text-white transition-colors flex items-center gap-1">
-                <Mail className="h-4 w-4" />
+            <div className="flex items-center justify-center gap-6 text-blue-200 text-sm">
+              <Link
+                href="/support"
+                className="hover:text-white transition-all duration-300 hover:scale-105 flex items-center gap-1 group"
+              >
+                <Mail className="h-4 w-4 transition-transform group-hover:scale-110" />
                 Support
               </Link>
-              <Link href="/auth/debug" className="hover:text-white transition-colors flex items-center gap-1">
-                <RefreshCw className="h-4 w-4" />
+              <Link
+                href="/auth/debug"
+                className="hover:text-white transition-all duration-300 hover:scale-105 flex items-center gap-1 group"
+              >
+                <RefreshCw className="h-4 w-4 transition-transform group-hover:rotate-180" />
                 Diagnostic
               </Link>
             </div>
-            <p className="text-teal-300 text-xs">© 2025 DocIA - Douala General Hospital. Tous droits réservés.</p>
+            <p className="text-blue-300 text-xs">© 2025 DocIA - Douala General Hospital. Tous droits réservés.</p>
           </div>
         </div>
       </div>
