@@ -38,6 +38,9 @@ import {
   Heart,
   Stethoscope,
 } from "lucide-react"
+import { useTheme } from "@/lib/theme-context"
+import { getTranslation } from "@/lib/translations"
+import { LanguageToggle } from "@/components/language-toggle"
 
 export default function AuthPage() {
   const [loading, setLoading] = useState(false)
@@ -53,7 +56,11 @@ export default function AuthPage() {
   const [initialLoading, setInitialLoading] = useState(true)
   const [resetPasswordOpen, setResetPasswordOpen] = useState(false)
   const [resetEmail, setResetEmail] = useState("")
+  const [resetLoading, setResetLoading] = useState(false)
   const router = useRouter()
+  const { language } = useTheme()
+
+  const t = (key: any) => getTranslation(language, key)
 
   // Vérifier si l'utilisateur est déjà connecté
   useEffect(() => {
@@ -135,13 +142,13 @@ export default function AuthPage() {
     clearMessages()
 
     if (!validateEmail(email)) {
-      setError("Veuillez entrer une adresse email valide.")
+      setError(t("enterValidEmail"))
       setLoading(false)
       return
     }
 
     if (!validatePassword(password)) {
-      setError("Le mot de passe doit contenir au moins 6 caractères.")
+      setError(t("passwordMinLength"))
       setLoading(false)
       return
     }
@@ -155,13 +162,13 @@ export default function AuthPage() {
       if (error) {
         switch (error.message) {
           case "Invalid login credentials":
-            setError("Email ou mot de passe incorrect. Vérifiez vos identifiants.")
+            setError(t("invalidCredentials"))
             break
           case "Email not confirmed":
-            setError("Veuillez confirmer votre email avant de vous connecter.")
+            setError(t("emailNotConfirmed"))
             break
           case "Too many requests":
-            setError("Trop de tentatives de connexion. Veuillez patienter quelques minutes.")
+            setError(t("tooManyRequests"))
             break
           default:
             setError(`Erreur de connexion: ${error.message}`)
@@ -170,7 +177,7 @@ export default function AuthPage() {
       }
 
       if (data.user && data.session) {
-        setSuccess("Connexion réussie ! Redirection en cours...")
+        setSuccess(t("connectionSuccess"))
         setTimeout(() => {
           router.push("/chat")
           router.refresh()
@@ -190,25 +197,25 @@ export default function AuthPage() {
     clearMessages()
 
     if (!validateEmail(email)) {
-      setError("Veuillez entrer une adresse email valide.")
+      setError(t("enterValidEmail"))
       setLoading(false)
       return
     }
 
     if (!validatePassword(password)) {
-      setError("Le mot de passe doit contenir au moins 6 caractères.")
+      setError(t("passwordMinLength"))
       setLoading(false)
       return
     }
 
     if (password !== confirmPassword) {
-      setError("Les mots de passe ne correspondent pas.")
+      setError(t("passwordsNotMatch"))
       setLoading(false)
       return
     }
 
     if (!fullName.trim()) {
-      setError("Veuillez entrer votre nom complet.")
+      setError(t("enterFullName"))
       setLoading(false)
       return
     }
@@ -229,10 +236,10 @@ export default function AuthPage() {
       if (error) {
         switch (error.message) {
           case "User already registered":
-            setError("Un compte existe déjà avec cette adresse email.")
+            setError(t("userAlreadyExists"))
             break
           case "Password should be at least 6 characters":
-            setError("Le mot de passe doit contenir au moins 6 caractères.")
+            setError(t("passwordMinLength"))
             break
           default:
             setError(`Erreur d'inscription: ${error.message}`)
@@ -242,12 +249,12 @@ export default function AuthPage() {
 
       if (data.user) {
         if (data.user.email_confirmed_at) {
-          setSuccess("Compte créé avec succès ! Redirection en cours...")
+          setSuccess(t("accountCreated"))
           setTimeout(() => {
             router.push("/chat")
           }, 1000)
         } else {
-          setSuccess("Compte créé ! Vérifiez votre email pour confirmer votre inscription.")
+          setSuccess(t("checkEmailConfirm"))
           setActiveTab("signin")
         }
       }
@@ -266,11 +273,11 @@ export default function AuthPage() {
     }
 
     if (!validateEmail(resetEmail)) {
-      setError("Veuillez entrer une adresse email valide.")
+      setError(t("enterValidEmail"))
       return
     }
 
-    setLoading(true)
+    setResetLoading(true)
     clearMessages()
 
     try {
@@ -283,13 +290,13 @@ export default function AuthPage() {
         return
       }
 
-      setSuccess("Email de réinitialisation envoyé ! Vérifiez votre boîte de réception.")
+      setSuccess(t("resetEmailSent"))
       setResetPasswordOpen(false)
       setResetEmail("")
     } catch (error: any) {
       setError("Erreur lors de l'envoi de l'email de réinitialisation.")
     } finally {
-      setLoading(false)
+      setResetLoading(false)
     }
   }
 
@@ -312,7 +319,7 @@ export default function AuthPage() {
               <Stethoscope className="h-10 w-10 text-indigo-600" />
             </div>
           </div>
-          <p className="text-xl font-medium animate-pulse">Vérification de votre session...</p>
+          <p className="text-xl font-medium animate-pulse">{t("sessionCheck")}</p>
           <div className="mt-4 flex justify-center space-x-1">
             <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce"></div>
             <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce delay-100"></div>
@@ -341,13 +348,16 @@ export default function AuthPage() {
         <div className="w-full max-w-md animate-fade-in-up">
           {/* Header */}
           <div className="text-center mb-8">
-            <Link
-              href="/"
-              className="inline-flex items-center text-white/80 hover:text-white mb-8 transition-all duration-300 hover:scale-105 group"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2 transition-transform group-hover:-translate-x-1" />
-              Retour à l'accueil
-            </Link>
+            <div className="flex items-center justify-between mb-8">
+              <Link
+                href="/"
+                className="inline-flex items-center text-white/80 hover:text-white transition-all duration-300 hover:scale-105 group"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2 transition-transform group-hover:-translate-x-1" />
+                {t("backToHome")}
+              </Link>
+              <LanguageToggle />
+            </div>
 
             <div className="flex items-center justify-center space-x-4 mb-8">
               <div className="relative group">
@@ -360,13 +370,13 @@ export default function AuthPage() {
                 <h1 className="text-4xl font-bold text-white mb-1 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                   DocIA
                 </h1>
-                <p className="text-blue-200 text-sm font-medium">Assistant Santé Intelligent</p>
+                <p className="text-blue-200 text-sm font-medium">{t("intelligentHealthAssistant")}</p>
               </div>
             </div>
 
             <div className="space-y-2 mb-6">
-              <p className="text-white text-xl font-semibold">Bienvenue dans votre espace santé</p>
-              <p className="text-blue-200 text-sm">Connectez-vous pour accéder à votre assistant médical personnel</p>
+              <p className="text-white text-xl font-semibold">{t("welcomeToHealthSpace")}</p>
+              <p className="text-blue-200 text-sm">{t("connectToAccess")}</p>
             </div>
 
             {/* Statut de connexion */}
@@ -374,19 +384,19 @@ export default function AuthPage() {
               {connectionStatus === "checking" && (
                 <Badge className="bg-white/10 backdrop-blur-sm text-white border-white/20 animate-pulse">
                   <RefreshCw className="h-3 w-3 mr-1 animate-spin" />
-                  Vérification...
+                  {t("checking")}
                 </Badge>
               )}
               {connectionStatus === "connected" && (
                 <Badge className="bg-green-500/20 backdrop-blur-sm text-green-100 border-green-400/30 animate-fade-in">
                   <Wifi className="h-3 w-3 mr-1" />
-                  Connecté
+                  {t("connected")}
                 </Badge>
               )}
               {connectionStatus === "disconnected" && (
                 <Badge className="bg-red-500/20 backdrop-blur-sm text-red-100 border-red-400/30 animate-shake">
                   <WifiOff className="h-3 w-3 mr-1" />
-                  Déconnecté
+                  {t("disconnected")}
                 </Badge>
               )}
             </div>
@@ -397,11 +407,9 @@ export default function AuthPage() {
             <CardHeader className="text-center pb-6">
               <CardTitle className="text-2xl text-white flex items-center justify-center gap-2">
                 <Sparkles className="h-6 w-6 text-yellow-300 animate-pulse" />
-                Accès Sécurisé
+                {t("secureAccess")}
               </CardTitle>
-              <CardDescription className="text-blue-100">
-                Connectez-vous ou créez un compte pour commencer votre suivi médical
-              </CardDescription>
+              <CardDescription className="text-blue-100">{t("connectOrCreate")}</CardDescription>
             </CardHeader>
 
             <CardContent className="space-y-6">
@@ -427,14 +435,14 @@ export default function AuthPage() {
                     className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 transition-all duration-300"
                   >
                     <Lock className="h-4 w-4 mr-2" />
-                    Connexion
+                    {t("connection")}
                   </TabsTrigger>
                   <TabsTrigger
                     value="signup"
                     className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 transition-all duration-300"
                   >
                     <User className="h-4 w-4 mr-2" />
-                    Inscription
+                    {t("registration")}
                   </TabsTrigger>
                 </TabsList>
 
@@ -467,7 +475,7 @@ export default function AuthPage() {
                       />
                     </svg>
                   )}
-                  {loading ? "Connexion..." : "Continuer avec Google"}
+                  {loading ? "Connexion..." : t("continueWithGoogle")}
                 </Button>
 
                 <div className="relative mb-6">
@@ -475,7 +483,7 @@ export default function AuthPage() {
                     <span className="w-full border-t border-white/30" />
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-transparent px-3 text-white/70 font-medium">Ou avec votre email</span>
+                    <span className="bg-transparent px-3 text-white/70 font-medium">{t("orWithEmail")}</span>
                   </div>
                 </div>
 
@@ -483,7 +491,7 @@ export default function AuthPage() {
                   <form onSubmit={handleEmailSignIn} className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="email" className="text-white font-medium">
-                        Adresse email
+                        {t("emailAddress")}
                       </Label>
                       <div className="relative group">
                         <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
@@ -502,7 +510,7 @@ export default function AuthPage() {
 
                     <div className="space-y-2">
                       <Label htmlFor="password" className="text-white font-medium">
-                        Mot de passe
+                        {t("password")}
                       </Label>
                       <div className="relative group">
                         <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
@@ -542,20 +550,18 @@ export default function AuthPage() {
                             className="text-sm text-blue-200 hover:text-white p-0 transition-colors"
                             disabled={loading}
                           >
-                            Mot de passe oublié ?
+                            {t("forgotPassword")}
                           </Button>
                         </DialogTrigger>
                         <DialogContent className="bg-white/10 backdrop-blur-xl border border-white/20 text-white">
                           <DialogHeader>
-                            <DialogTitle className="text-white">Réinitialiser le mot de passe</DialogTitle>
-                            <DialogDescription className="text-white/70">
-                              Entrez votre adresse email pour recevoir un lien de réinitialisation.
-                            </DialogDescription>
+                            <DialogTitle className="text-white">{t("resetPassword")}</DialogTitle>
+                            <DialogDescription className="text-white/70">{t("resetPasswordDesc")}</DialogDescription>
                           </DialogHeader>
                           <div className="space-y-4">
                             <div className="space-y-2">
                               <Label htmlFor="reset-email" className="text-white">
-                                Adresse email
+                                {t("emailAddress")}
                               </Label>
                               <Input
                                 id="reset-email"
@@ -569,15 +575,15 @@ export default function AuthPage() {
                             </div>
                             <Button
                               onClick={handleForgotPassword}
-                              disabled={loading || !resetEmail}
+                              disabled={resetLoading || !resetEmail}
                               className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
                             >
-                              {loading ? (
+                              {resetLoading ? (
                                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                               ) : (
                                 <Mail className="w-4 h-4 mr-2" />
                               )}
-                              Envoyer le lien
+                              {t("sendResetLink")}
                             </Button>
                           </div>
                         </DialogContent>
@@ -594,7 +600,7 @@ export default function AuthPage() {
                       ) : (
                         <Shield className="w-4 h-4 mr-2" />
                       )}
-                      {loading ? "Connexion..." : "Se connecter"}
+                      {loading ? "Connexion..." : t("signIn")}
                     </Button>
                   </form>
                 </TabsContent>
@@ -603,7 +609,7 @@ export default function AuthPage() {
                   <form onSubmit={handleEmailSignUp} className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="signup-name" className="text-white font-medium">
-                        Nom complet
+                        {t("fullName")}
                       </Label>
                       <div className="relative group">
                         <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
@@ -622,7 +628,7 @@ export default function AuthPage() {
 
                     <div className="space-y-2">
                       <Label htmlFor="signup-email" className="text-white font-medium">
-                        Adresse email
+                        {t("emailAddress")}
                       </Label>
                       <div className="relative group">
                         <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
@@ -641,7 +647,7 @@ export default function AuthPage() {
 
                     <div className="space-y-2">
                       <Label htmlFor="signup-password" className="text-white font-medium">
-                        Mot de passe
+                        {t("password")}
                       </Label>
                       <div className="relative group">
                         <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
@@ -675,7 +681,7 @@ export default function AuthPage() {
 
                     <div className="space-y-2">
                       <Label htmlFor="confirm-password" className="text-white font-medium">
-                        Confirmer le mot de passe
+                        {t("confirmPassword")}
                       </Label>
                       <div className="relative group">
                         <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/50 group-focus-within:text-white transition-colors" />
@@ -699,7 +705,7 @@ export default function AuthPage() {
                       disabled={loading || connectionStatus === "disconnected"}
                     >
                       {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Heart className="w-4 h-4 mr-2" />}
-                      {loading ? "Création..." : "Créer mon compte"}
+                      {loading ? "Création..." : t("createAccount")}
                     </Button>
                   </form>
                 </TabsContent>
@@ -707,13 +713,13 @@ export default function AuthPage() {
 
               <div className="mt-6 text-center text-sm text-white/70">
                 <p>
-                  En continuant, vous acceptez nos{" "}
+                  {t("acceptTerms")}{" "}
                   <Link href="/terms" className="text-blue-200 hover:text-white font-medium transition-colors">
-                    conditions d'utilisation
+                    {t("termsOfUse")}
                   </Link>{" "}
-                  et notre{" "}
+                  {t("and")}{" "}
                   <Link href="/privacy" className="text-blue-200 hover:text-white font-medium transition-colors">
-                    politique de confidentialité
+                    {t("privacyPolicy")}
                   </Link>
                   .
                 </p>
@@ -729,17 +735,17 @@ export default function AuthPage() {
                 className="hover:text-white transition-all duration-300 hover:scale-105 flex items-center gap-1 group"
               >
                 <Mail className="h-4 w-4 transition-transform group-hover:scale-110" />
-                Support
+                {t("support")}
               </Link>
               <Link
                 href="/auth/debug"
                 className="hover:text-white transition-all duration-300 hover:scale-105 flex items-center gap-1 group"
               >
                 <RefreshCw className="h-4 w-4 transition-transform group-hover:rotate-180" />
-                Diagnostic
+                {t("diagnostic")}
               </Link>
             </div>
-            <p className="text-blue-300 text-xs">© 2025 DocIA - Douala General Hospital. Tous droits réservés.</p>
+            <p className="text-blue-300 text-xs">{t("copyright")}</p>
           </div>
         </div>
       </div>
