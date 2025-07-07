@@ -50,7 +50,7 @@ const ChatSection = () => {
       } else {
         throw new Error('Erreur de communication avec le serveur')
       }
-    } catch (error) {
+    } catch {
       const errorMessage = {
         id: Date.now() + 1,
         type: 'bot',
