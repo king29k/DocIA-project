@@ -19,17 +19,39 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Send, Plus, MessageCircle, User, LogOut, Menu, X, Heart, Brain, Pill, Activity, Shield, Thermometer, Stethoscope, FileText, Trash2, Settings, Edit, AlertTriangle, CheckCircle, Loader2 } from 'lucide-react'
+import {
+  Send,
+  Plus,
+  MessageCircle,
+  User,
+  LogOut,
+  Menu,
+  X,
+  Heart,
+  Brain,
+  Pill,
+  Activity,
+  Shield,
+  Thermometer,
+  Stethoscope,
+  FileText,
+  Trash2,
+  Settings,
+  Edit,
+  AlertTriangle,
+  CheckCircle,
+  Loader2,
+} from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { VoiceInput, TextToSpeech, FileUploadButton } from "@/components/voice-input"
 import { TypingMarkdown } from "@/components/typing-effect"
-import { AlertCircle } from 'lucide-react' // Import AlertCircle
-import { useTheme } from '@/lib/theme-context'
-import { ThemeToggle } from '@/components/theme-toggle'
-import { LanguageToggle } from '@/components/language-toggle'
+import { AlertCircle } from "lucide-react" // Import AlertCircle
+import { useTheme } from "@/lib/theme-context"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { LanguageToggle } from "@/components/language-toggle"
 
 interface Message {
   id: string
@@ -381,10 +403,7 @@ export default function ChatPage() {
     <div className="flex h-screen bg-gradient-to-br from-teal-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Mobile Overlay */}
       {sidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
+        <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
 
       {/* Sidebar */}
@@ -492,7 +511,11 @@ export default function ChatPage() {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-gray-500 hover:text-teal-600 dark:text-gray-400 dark:hover:text-teal-400">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-gray-500 hover:text-teal-600 dark:text-gray-400 dark:hover:text-teal-400"
+                >
                   <Settings className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -502,7 +525,10 @@ export default function ChatPage() {
                   {t.editProfile}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => setDeleteAccountDialogOpen(true)} className="text-red-600 dark:text-red-400">
+                <DropdownMenuItem
+                  onClick={() => setDeleteAccountDialogOpen(true)}
+                  className="text-red-600 dark:text-red-400"
+                >
                   <Trash2 className="h-4 w-4 mr-2" />
                   {t.deleteAccount}
                 </DropdownMenuItem>
@@ -540,10 +566,16 @@ export default function ChatPage() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary" className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700 hidden sm:inline-flex">
+              <Badge
+                variant="secondary"
+                className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700 hidden sm:inline-flex"
+              >
                 ✓ {t.secured}
               </Badge>
-              <Badge variant="outline" className="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700 hidden sm:inline-flex">
+              <Badge
+                variant="outline"
+                className="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700 hidden sm:inline-flex"
+              >
                 GPT-Neo AI
               </Badge>
             </div>
@@ -613,7 +645,9 @@ export default function ChatPage() {
 
                 {/* Health suggestions */}
                 <div className="space-y-4 sm:space-y-6">
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">{t.popularSuggestions}</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
+                    {t.popularSuggestions}
+                  </h3>
                   <div className="grid-responsive max-w-6xl mx-auto px-4">
                     {healthSuggestions.map((suggestion, index) => {
                       const Icon = suggestion.icon
@@ -633,13 +667,21 @@ export default function ChatPage() {
                                   "dark:" + suggestion.color.replace("bg-", "bg-").replace("-500", "-900/30"),
                                 )}
                               >
-                                <Icon className={cn("h-5 w-5 sm:h-6 sm:w-6", suggestion.textColor, "dark:" + suggestion.textColor.replace("text-", "text-").replace("-600", "-400"))} />
+                                <Icon
+                                  className={cn(
+                                    "h-5 w-5 sm:h-6 sm:w-6",
+                                    suggestion.textColor,
+                                    "dark:" + suggestion.textColor.replace("text-", "text-").replace("-600", "-400"),
+                                  )}
+                                />
                               </div>
                               <div className="flex-1 min-w-0">
                                 <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors text-sm sm:text-base">
                                   {suggestion.title}
                                 </h4>
-                                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{suggestion.question}</p>
+                                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                  {suggestion.question}
+                                </p>
                               </div>
                             </div>
                           </CardContent>
@@ -660,7 +702,10 @@ export default function ChatPage() {
                 {messages.map((message) => (
                   <div
                     key={message.id}
-                    className={cn("flex gap-3 sm:gap-4 animate-fade-in", message.role === "user" ? "justify-end" : "justify-start")}
+                    className={cn(
+                      "flex gap-3 sm:gap-4 animate-fade-in",
+                      message.role === "user" ? "justify-end" : "justify-start",
+                    )}
                   >
                     {message.role === "assistant" && (
                       <Avatar className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0 border-2 border-teal-200 dark:border-teal-700">
@@ -687,7 +732,9 @@ export default function ChatPage() {
                           className="text-sm leading-relaxed dark:text-gray-200"
                         />
                       ) : (
-                        <div className="whitespace-pre-wrap text-sm leading-relaxed dark:text-gray-200">{message.content}</div>
+                        <div className="whitespace-pre-wrap text-sm leading-relaxed dark:text-gray-200">
+                          {message.content}
+                        </div>
                       )}
 
                       <div className="flex items-center justify-between mt-3">
@@ -831,7 +878,13 @@ export default function ChatPage() {
 
             <div className="space-y-2">
               <Label htmlFor="email">{t.email}</Label>
-              <Input id="email" type="email" value={user?.email || ""} disabled className="bg-gray-50 dark:bg-gray-800" />
+              <Input
+                id="email"
+                type="email"
+                value={user?.email || ""}
+                disabled
+                className="bg-gray-50 dark:bg-gray-800"
+              />
               <p className="text-xs text-gray-500 dark:text-gray-400">{t.emailCannotChange}</p>
             </div>
 
@@ -895,9 +948,7 @@ export default function ChatPage() {
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-red-600 dark:text-red-400">{t.deleteAccountTitle}</DialogTitle>
-            <DialogDescription>
-              {t.deleteAccountDescription}
-            </DialogDescription>
+            <DialogDescription>{t.deleteAccountDescription}</DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
@@ -912,9 +963,7 @@ export default function ChatPage() {
               <AlertTriangle className="h-6 w-6 text-red-600 dark:text-red-400 flex-shrink-0" />
               <div>
                 <p className="text-sm font-medium text-red-800 dark:text-red-200">Attention</p>
-                <p className="text-xs text-red-700 dark:text-red-300">
-                  {t.deleteAccountWarning}
-                </p>
+                <p className="text-xs text-red-700 dark:text-red-300">{t.deleteAccountWarning}</p>
               </div>
             </div>
 

@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google"
 import "./globals.css"
 import { AuthProvider } from "@/components/auth-provider"
 import { ThemeProvider } from "@/lib/theme-context"
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
   },
-  generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
