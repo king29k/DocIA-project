@@ -19,36 +19,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import {
-  Send,
-  Plus,
-  MessageCircle,
-  User,
-  LogOut,
-  Menu,
-  X,
-  Heart,
-  Brain,
-  Pill,
-  Activity,
-  Shield,
-  Thermometer,
-  Stethoscope,
-  FileText,
-  Trash2,
-  Settings,
-  Edit,
-  AlertTriangle,
-  CheckCircle,
-  Loader2,
-} from "lucide-react"
+import { Send, Plus, MessageCircle, User, LogOut, Menu, X, Heart, Brain, Pill, Activity, Shield, Thermometer, Stethoscope, FileText, Trash2, Settings, Edit, AlertTriangle, CheckCircle, Loader2 } from 'lucide-react'
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { VoiceInput, TextToSpeech, FileUploadButton } from "@/components/voice-input"
 import { TypingMarkdown } from "@/components/typing-effect"
-import { AlertCircle } from "lucide-react" // Import AlertCircle
+import { AlertCircle } from 'lucide-react' // Import AlertCircle
+import { useTheme } from '@/lib/theme-context'
+import { ThemeToggle } from '@/components/theme-toggle'
+import { LanguageToggle } from '@/components/language-toggle'
 
 interface Message {
   id: string
@@ -67,52 +48,8 @@ interface Conversation {
   message_count?: number
 }
 
-const healthSuggestions = [
-  {
-    icon: Heart,
-    title: "Cardiologie",
-    question: "Comment prévenir les maladies cardiovasculaires ?",
-    color: "bg-red-500",
-    textColor: "text-red-600",
-  },
-  {
-    icon: Brain,
-    title: "Neurologie",
-    question: "Quels sont les signes d'un AVC ?",
-    color: "bg-purple-500",
-    textColor: "text-purple-600",
-  },
-  {
-    icon: Pill,
-    title: "Médicaments",
-    question: "Comment prendre correctement les antibiotiques ?",
-    color: "bg-blue-500",
-    textColor: "text-blue-600",
-  },
-  {
-    icon: Activity,
-    title: "Diabète",
-    question: "Comment contrôler sa glycémie au quotidien ?",
-    color: "bg-green-500",
-    textColor: "text-green-600",
-  },
-  {
-    icon: Shield,
-    title: "Prévention",
-    question: "Comment renforcer son système immunitaire ?",
-    color: "bg-yellow-500",
-    textColor: "text-yellow-600",
-  },
-  {
-    icon: Thermometer,
-    title: "Symptômes",
-    question: "Que faire en cas de fièvre persistante ?",
-    color: "bg-orange-500",
-    textColor: "text-orange-600",
-  },
-]
-
 export default function ChatPage() {
+  const { t } = useTheme()
   const [messages, setMessages] = useState<Message[]>([])
   const [conversations, setConversations] = useState<Conversation[]>([])
   const [currentConversation, setCurrentConversation] = useState<string | null>(null)
@@ -132,6 +69,52 @@ export default function ChatPage() {
   const [profileSuccess, setProfileSuccess] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
+
+  // Update health suggestions to use translations
+  const healthSuggestions = [
+    {
+      icon: Heart,
+      title: t.cardiology,
+      question: t.cardiovascularPrevention,
+      color: "bg-red-500",
+      textColor: "text-red-600",
+    },
+    {
+      icon: Brain,
+      title: t.neurology,
+      question: t.strokeSigns,
+      color: "bg-purple-500",
+      textColor: "text-purple-600",
+    },
+    {
+      icon: Pill,
+      title: t.medications,
+      question: t.antibioticsUsage,
+      color: "bg-blue-500",
+      textColor: "text-blue-600",
+    },
+    {
+      icon: Activity,
+      title: t.diabetes,
+      question: t.glucoseControl,
+      color: "bg-green-500",
+      textColor: "text-green-600",
+    },
+    {
+      icon: Shield,
+      title: t.prevention,
+      question: t.immuneSystem,
+      color: "bg-yellow-500",
+      textColor: "text-yellow-600",
+    },
+    {
+      icon: Thermometer,
+      title: t.symptoms,
+      question: t.persistentFever,
+      color: "bg-orange-500",
+      textColor: "text-orange-600",
+    },
+  ]
 
   useEffect(() => {
     checkUser()
@@ -395,30 +378,43 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-teal-50 via-white to-blue-50">
+    <div className="flex h-screen bg-gradient-to-br from-teal-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
       <div
         className={cn(
-          "bg-white/80 backdrop-blur-sm border-r border-teal-200 transition-all duration-300 flex flex-col shadow-lg",
-          sidebarOpen ? "w-80" : "w-0 overflow-hidden",
+          "bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-r border-teal-200 dark:border-gray-700 transition-all duration-300 flex flex-col shadow-lg z-50",
+          "fixed lg:relative inset-y-0 left-0",
+          sidebarOpen ? "w-80 translate-x-0" : "w-0 -translate-x-full lg:translate-x-0 overflow-hidden",
         )}
       >
         {/* Sidebar Header */}
-        <div className="p-6 border-b border-teal-100">
-          <div className="flex items-center justify-between mb-6">
+        <div className="p-4 sm:p-6 border-b border-teal-100 dark:border-gray-700">
+          <div className="flex items-center justify-between mb-4 sm:mb-6">
             <div className="flex items-center space-x-3">
               <div className="relative">
                 <Image src="/images/logo.png" alt="DocIA" width={40} height={40} className="rounded-full" />
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-900"></div>
               </div>
               <div>
-                <span className="font-bold text-teal-900 text-lg">DocIA</span>
-                <p className="text-xs text-teal-600">Assistant Santé</p>
+                <span className="font-bold text-teal-900 dark:text-teal-100 text-lg">DocIA</span>
+                <p className="text-xs text-teal-600 dark:text-teal-400">Assistant Santé</p>
               </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={() => setSidebarOpen(false)} className="lg:hidden">
-              <X className="h-4 w-4" />
-            </Button>
+            <div className="flex items-center space-x-2">
+              <ThemeToggle />
+              <LanguageToggle />
+              <Button variant="ghost" size="sm" onClick={() => setSidebarOpen(false)} className="lg:hidden">
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
 
           <Button
@@ -426,12 +422,12 @@ export default function ChatPage() {
             className="w-full bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white shadow-md"
           >
             <Plus className="h-4 w-4 mr-2" />
-            Nouvelle conversation
+            {t.newConversation}
           </Button>
         </div>
 
-        {/* Conversations List */}
-        <ScrollArea className="flex-1 p-4">
+        {/* Rest of sidebar content with responsive improvements... */}
+        <ScrollArea className="flex-1 p-2 sm:p-4">
           <div className="space-y-2">
             {conversations.map((conversation) => (
               <div
@@ -439,8 +435,8 @@ export default function ChatPage() {
                 className={cn(
                   "group relative rounded-xl transition-all",
                   currentConversation === conversation.id
-                    ? "bg-teal-100 border border-teal-200 shadow-sm"
-                    : "hover:bg-teal-50",
+                    ? "bg-teal-100 dark:bg-teal-900/30 border border-teal-200 dark:border-teal-700 shadow-sm"
+                    : "hover:bg-teal-50 dark:hover:bg-gray-800/50",
                 )}
               >
                 <Button
@@ -448,12 +444,12 @@ export default function ChatPage() {
                   className="w-full justify-start text-left h-auto p-3 rounded-xl"
                   onClick={() => selectConversation(conversation.id)}
                 >
-                  <MessageCircle className="h-4 w-4 mr-3 flex-shrink-0 text-teal-600" />
+                  <MessageCircle className="h-4 w-4 mr-3 flex-shrink-0 text-teal-600 dark:text-teal-400" />
                   <div className="flex-1 min-w-0">
-                    <div className="truncate font-medium text-sm">{conversation.title}</div>
+                    <div className="truncate font-medium text-sm dark:text-gray-200">{conversation.title}</div>
                     <div className="flex items-center gap-2 mt-1">
-                      <div className="text-xs text-gray-500">
-                        {new Date(conversation.updated_at).toLocaleDateString("fr-FR")}
+                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                        {new Date(conversation.updated_at).toLocaleDateString()}
                       </div>
                       {conversation.message_count && (
                         <Badge variant="secondary" className="text-xs">
@@ -477,43 +473,43 @@ export default function ChatPage() {
         </ScrollArea>
 
         {/* User Profile */}
-        <div className="p-4 border-t border-teal-100 bg-teal-50/50">
+        <div className="p-4 border-t border-teal-100 dark:border-gray-700 bg-teal-50/50 dark:bg-gray-800/50">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 flex-1 min-w-0">
-              <Avatar className="h-10 w-10 border-2 border-teal-200">
+              <Avatar className="h-10 w-10 border-2 border-teal-200 dark:border-teal-700">
                 <AvatarImage src={user?.user_metadata?.avatar_url || "/placeholder.svg"} />
-                <AvatarFallback className="bg-teal-100 text-teal-700">
+                <AvatarFallback className="bg-teal-100 dark:bg-teal-900 text-teal-700 dark:text-teal-300">
                   <User className="h-5 w-5" />
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium truncate text-teal-900">
+                <div className="text-sm font-medium truncate text-teal-900 dark:text-teal-100">
                   {user?.user_metadata?.full_name || user?.email}
                 </div>
-                <div className="text-xs text-teal-600">Patient</div>
+                <div className="text-xs text-teal-600 dark:text-teal-400">{t.patient}</div>
               </div>
             </div>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-gray-500 hover:text-teal-600">
+                <Button variant="ghost" size="sm" className="text-gray-500 hover:text-teal-600 dark:text-gray-400 dark:hover:text-teal-400">
                   <Settings className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuItem onClick={() => setProfileDialogOpen(true)}>
                   <User className="h-4 w-4 mr-2" />
-                  Modifier le profil
+                  {t.editProfile}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => setDeleteAccountDialogOpen(true)} className="text-red-600">
+                <DropdownMenuItem onClick={() => setDeleteAccountDialogOpen(true)} className="text-red-600 dark:text-red-400">
                   <Trash2 className="h-4 w-4 mr-2" />
-                  Supprimer le compte
+                  {t.deleteAccount}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut}>
                   <LogOut className="h-4 w-4 mr-2" />
-                  Se déconnecter
+                  {t.signOut}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -522,9 +518,9 @@ export default function ChatPage() {
       </div>
 
       {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <div className="bg-white/80 backdrop-blur-sm border-b border-teal-100 p-4 shadow-sm">
+        <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-teal-100 dark:border-gray-700 p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               {!sidebarOpen && (
@@ -534,21 +530,21 @@ export default function ChatPage() {
               )}
               <div className="flex items-center space-x-3">
                 <div className="relative">
-                  <Stethoscope className="h-8 w-8 text-teal-600" />
+                  <Stethoscope className="h-6 sm:h-8 w-6 sm:w-8 text-teal-600 dark:text-teal-400" />
                   <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                 </div>
-                <div>
-                  <h1 className="font-bold text-teal-900 text-lg">DocIA Assistant</h1>
-                  <p className="text-sm text-teal-600">Douala General Hospital • En ligne</p>
+                <div className="hidden sm:block">
+                  <h1 className="font-bold text-teal-900 dark:text-teal-100 text-lg">DocIA Assistant</h1>
+                  <p className="text-sm text-teal-600 dark:text-teal-400">Douala General Hospital • {t.online}</p>
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary" className="bg-green-100 text-green-700 border-green-200">
-                ✓ Sécurisé
+              <Badge variant="secondary" className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700 hidden sm:inline-flex">
+                ✓ {t.secured}
               </Badge>
-              <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                Gemini AI
+              <Badge variant="outline" className="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700 hidden sm:inline-flex">
+                GPT-Neo AI
               </Badge>
             </div>
           </div>
@@ -556,93 +552,94 @@ export default function ChatPage() {
 
         {/* Messages Area */}
         <ScrollArea className="flex-1">
-          <div className="max-w-4xl mx-auto p-6">
+          <div className="container-responsive py-4 sm:py-6">
             {showWelcome ? (
-              /* Welcome Screen */
-              <div className="text-center py-12 space-y-8">
-                {/* Logo et titre principal */}
-                <div className="space-y-6">
-                  <div className="relative mx-auto w-24 h-24">
+              /* Welcome Screen with responsive improvements */
+              <div className="text-center py-8 sm:py-12 space-y-6 sm:space-y-8">
+                {/* Logo and main title */}
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="relative mx-auto w-20 h-20 sm:w-24 sm:h-24">
                     <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-blue-500 rounded-full animate-pulse opacity-20"></div>
-                    <div className="relative bg-gradient-to-r from-teal-500 to-blue-600 rounded-full p-6 shadow-lg">
-                      <Stethoscope className="h-12 w-12 text-white" />
+                    <div className="relative bg-gradient-to-r from-teal-500 to-blue-600 rounded-full p-4 sm:p-6 shadow-lg">
+                      <Stethoscope className="h-8 w-8 sm:h-12 sm:w-12 text-white" />
                     </div>
                   </div>
 
                   <div>
-                    <h1 className="text-4xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mb-3">
-                      Comment puis-je vous aider aujourd'hui ?
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mb-3">
+                      {t.welcomeTitle}
                     </h1>
-                    <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                      Posez-moi vos questions de santé, partagez vos documents médicaux ou décrivez vos symptômes. Je
-                      peux analyser vos examens, photos et vous fournir des informations personnalisées.
+                    <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg max-w-2xl mx-auto px-4">
+                      {t.welcomeDescription}
                     </p>
                   </div>
                 </div>
 
-                {/* Zone de saisie principale */}
-                <div className="max-w-3xl mx-auto space-y-4">
+                {/* Main input area */}
+                <div className="max-w-3xl mx-auto space-y-4 px-4">
                   <form onSubmit={handleSubmit} className="relative">
                     <div className="relative">
                       <Input
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        placeholder="Décrivez vos symptômes, posez une question ou envoyez des documents..."
-                        className="w-full h-16 pl-6 pr-32 text-lg border-2 border-teal-200 rounded-2xl focus:border-teal-400 focus:ring-4 focus:ring-teal-100 bg-white/80 backdrop-blur-sm shadow-lg"
+                        placeholder={t.inputPlaceholder}
+                        className="w-full h-14 sm:h-16 pl-4 sm:pl-6 pr-28 sm:pr-32 text-base sm:text-lg border-2 border-teal-200 dark:border-teal-700 rounded-2xl focus:border-teal-400 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-100 dark:focus:ring-teal-900/50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg"
                         disabled={loading}
                       />
 
-                      {/* Boutons dans l'input */}
-                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                      {/* Buttons in input */}
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-1 sm:space-x-2">
                         <FileUploadButton onFilesChange={setFiles} disabled={loading} />
                         <VoiceInput onTranscript={handleVoiceTranscript} disabled={loading} />
                         <Button
                           type="submit"
                           disabled={(!input.trim() && files.length === 0) || loading}
-                          className="h-10 w-10 p-0 bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white rounded-full shadow-md"
+                          className="h-8 w-8 sm:h-10 sm:w-10 p-0 bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white rounded-full shadow-md"
                         >
-                          <Send className="h-4 w-4" />
+                          <Send className="h-3 w-3 sm:h-4 sm:w-4" />
                         </Button>
                       </div>
                     </div>
 
-                    {/* Compteur de caractères */}
-                    <div className="flex justify-between items-center mt-3 px-2">
-                      <p className="text-xs text-gray-500">
+                    {/* Character counter */}
+                    <div className="flex justify-between items-center mt-3 px-2 text-xs sm:text-sm">
+                      <p className="text-gray-500 dark:text-gray-400">
                         DocIA peut analyser vos documents médicaux et images. Parlez ou tapez votre question.
                       </p>
-                      <span className="text-xs text-gray-400">{input.length}/1000</span>
+                      <span className="text-gray-400 dark:text-gray-500">{input.length}/1000</span>
                     </div>
                   </form>
                 </div>
 
-                {/* Suggestions de santé */}
-                <div className="space-y-6">
-                  <h3 className="text-xl font-semibold text-gray-800">Suggestions populaires</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+                {/* Health suggestions */}
+                <div className="space-y-4 sm:space-y-6">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">{t.popularSuggestions}</h3>
+                  <div className="grid-responsive max-w-6xl mx-auto px-4">
                     {healthSuggestions.map((suggestion, index) => {
                       const Icon = suggestion.icon
                       return (
                         <Card
                           key={index}
-                          className="group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-2 border-transparent hover:border-teal-200 bg-white/80 backdrop-blur-sm"
+                          className="group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm animate-fade-in"
                           onClick={() => handleSuggestionClick(suggestion.question)}
+                          style={{ animationDelay: `${index * 100}ms` }}
                         >
-                          <CardContent className="p-6">
+                          <CardContent className="card-responsive">
                             <div className="flex items-start space-x-4">
                               <div
                                 className={cn(
                                   "p-3 rounded-xl shadow-sm group-hover:shadow-md transition-all",
                                   suggestion.color.replace("bg-", "bg-").replace("-500", "-100"),
+                                  "dark:" + suggestion.color.replace("bg-", "bg-").replace("-500", "-900/30"),
                                 )}
                               >
-                                <Icon className={cn("h-6 w-6", suggestion.textColor)} />
+                                <Icon className={cn("h-5 w-5 sm:h-6 sm:w-6", suggestion.textColor, "dark:" + suggestion.textColor.replace("text-", "text-").replace("-600", "-400"))} />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <h4 className="font-semibold text-gray-900 mb-2 group-hover:text-teal-700 transition-colors">
+                                <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors text-sm sm:text-base">
                                   {suggestion.title}
                                 </h4>
-                                <p className="text-sm text-gray-600 leading-relaxed">{suggestion.question}</p>
+                                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{suggestion.question}</p>
                               </div>
                             </div>
                           </CardContent>
@@ -653,33 +650,33 @@ export default function ChatPage() {
                 </div>
 
                 {/* Footer */}
-                <div className="pt-8 border-t border-gray-200 mt-12">
-                  <p className="text-sm text-gray-500">© 2025 DocIA - Douala General Hospital. Tous droits réservés.</p>
+                <div className="pt-6 sm:pt-8 border-t border-gray-200 dark:border-gray-700 mt-8 sm:mt-12">
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 px-4">{t.copyright}</p>
                 </div>
               </div>
             ) : (
-              /* Messages de conversation */
-              <div className="space-y-6">
+              /* Messages conversation with responsive improvements */
+              <div className="space-y-4 sm:space-y-6">
                 {messages.map((message) => (
                   <div
                     key={message.id}
-                    className={cn("flex gap-4", message.role === "user" ? "justify-end" : "justify-start")}
+                    className={cn("flex gap-3 sm:gap-4 animate-fade-in", message.role === "user" ? "justify-end" : "justify-start")}
                   >
                     {message.role === "assistant" && (
-                      <Avatar className="h-10 w-10 flex-shrink-0 border-2 border-teal-200">
+                      <Avatar className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0 border-2 border-teal-200 dark:border-teal-700">
                         <AvatarImage src="/images/logo.png" />
-                        <AvatarFallback className="bg-teal-100 text-teal-600">
-                          <Stethoscope className="h-5 w-5" />
+                        <AvatarFallback className="bg-teal-100 dark:bg-teal-900 text-teal-600 dark:text-teal-300">
+                          <Stethoscope className="h-4 w-4 sm:h-5 sm:w-5" />
                         </AvatarFallback>
                       </Avatar>
                     )}
 
                     <div
                       className={cn(
-                        "max-w-[80%] rounded-2xl px-6 py-4 shadow-md",
+                        "max-w-[85%] sm:max-w-[80%] rounded-2xl px-4 sm:px-6 py-3 sm:py-4 shadow-md",
                         message.role === "user"
                           ? "bg-gradient-to-r from-teal-500 to-blue-600 text-white"
-                          : "bg-white border border-gray-200",
+                          : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700",
                       )}
                     >
                       {message.role === "assistant" && typingMessageId === message.id ? (
@@ -687,10 +684,10 @@ export default function ChatPage() {
                           text={message.content}
                           speed={20}
                           onComplete={() => setTypingMessageId(null)}
-                          className="text-sm leading-relaxed"
+                          className="text-sm leading-relaxed dark:text-gray-200"
                         />
                       ) : (
-                        <div className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</div>
+                        <div className="whitespace-pre-wrap text-sm leading-relaxed dark:text-gray-200">{message.content}</div>
                       )}
 
                       <div className="flex items-center justify-between mt-3">
@@ -698,7 +695,7 @@ export default function ChatPage() {
                           <div
                             className={cn(
                               "text-xs opacity-70",
-                              message.role === "user" ? "text-teal-100" : "text-gray-500",
+                              message.role === "user" ? "text-teal-100" : "text-gray-500 dark:text-gray-400",
                             )}
                           >
                             {new Date(message.created_at).toLocaleTimeString("fr-FR", {
@@ -709,12 +706,12 @@ export default function ChatPage() {
                           {message.has_files && (
                             <Badge variant="secondary" className="text-xs">
                               <FileText className="h-3 w-3 mr-1" />
-                              Fichiers
+                              {t.filesAttached}
                             </Badge>
                           )}
                           {message.metadata?.confidence && (
                             <Badge variant="outline" className="text-xs">
-                              {message.metadata.confidence}% confiance
+                              {message.metadata.confidence}% {t.confidence}
                             </Badge>
                           )}
                         </div>
@@ -723,10 +720,10 @@ export default function ChatPage() {
                     </div>
 
                     {message.role === "user" && (
-                      <Avatar className="h-10 w-10 flex-shrink-0 border-2 border-blue-200">
+                      <Avatar className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0 border-2 border-blue-200 dark:border-blue-700">
                         <AvatarImage src={user?.user_metadata?.avatar_url || "/placeholder.svg"} />
-                        <AvatarFallback className="bg-blue-100 text-blue-600">
-                          <User className="h-5 w-5" />
+                        <AvatarFallback className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300">
+                          <User className="h-4 w-4 sm:h-5 sm:w-5" />
                         </AvatarFallback>
                       </Avatar>
                     )}
@@ -734,14 +731,14 @@ export default function ChatPage() {
                 ))}
 
                 {loading && (
-                  <div className="flex gap-4 justify-start">
-                    <Avatar className="h-10 w-10 flex-shrink-0 border-2 border-teal-200">
+                  <div className="flex gap-3 sm:gap-4 justify-start animate-fade-in">
+                    <Avatar className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0 border-2 border-teal-200 dark:border-teal-700">
                       <AvatarImage src="/images/logo.png" />
-                      <AvatarFallback className="bg-teal-100 text-teal-600">
-                        <Stethoscope className="h-5 w-5" />
+                      <AvatarFallback className="bg-teal-100 dark:bg-teal-900 text-teal-600 dark:text-teal-300">
+                        <Stethoscope className="h-4 w-4 sm:h-5 sm:w-5" />
                       </AvatarFallback>
                     </Avatar>
-                    <div className="bg-white border border-gray-200 rounded-2xl px-6 py-4 shadow-md">
+                    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl px-4 sm:px-6 py-3 sm:py-4 shadow-md">
                       <div className="flex space-x-2">
                         <div className="w-2 h-2 bg-teal-500 rounded-full animate-bounce"></div>
                         <div
@@ -763,17 +760,17 @@ export default function ChatPage() {
           </div>
         </ScrollArea>
 
-        {/* Input Area (visible seulement quand il y a des messages) */}
+        {/* Input Area (visible only when there are messages) */}
         {!showWelcome && (
-          <div className="bg-white/80 backdrop-blur-sm border-t border-teal-100 p-4 shadow-lg">
-            <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
-              <div className="relative flex items-center space-x-3">
+          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-t border-teal-100 dark:border-gray-700 p-4 shadow-lg">
+            <form onSubmit={handleSubmit} className="container-responsive">
+              <div className="relative flex items-center space-x-2 sm:space-x-3">
                 <div className="flex-1 relative">
                   <Input
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder="Continuez votre conversation..."
-                    className="pr-24 py-3 text-base border-2 border-teal-200 focus:border-teal-400 rounded-2xl bg-white/80 backdrop-blur-sm"
+                    placeholder={t.continuePlaceholder}
+                    className="pr-20 sm:pr-24 py-2 sm:py-3 text-sm sm:text-base border-2 border-teal-200 dark:border-teal-700 focus:border-teal-400 dark:focus:border-teal-500 rounded-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm"
                     disabled={loading}
                   />
                   <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-1">
@@ -784,7 +781,7 @@ export default function ChatPage() {
                 <Button
                   type="submit"
                   disabled={(!input.trim() && files.length === 0) || loading}
-                  className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white rounded-2xl px-6 py-3 shadow-md"
+                  className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white rounded-2xl px-4 sm:px-6 py-2 sm:py-3 shadow-md"
                 >
                   <Send className="h-4 w-4" />
                 </Button>
@@ -794,52 +791,52 @@ export default function ChatPage() {
         )}
       </div>
 
-      {/* Profile Dialog */}
+      {/* Profile Dialog with translations */}
       <Dialog open={profileDialogOpen} onOpenChange={setProfileDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Modifier le profil</DialogTitle>
+            <DialogTitle>{t.modifyProfile}</DialogTitle>
             <DialogDescription>Modifiez vos informations personnelles</DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
             {profileError && (
-              <Alert className="border-red-200 bg-red-50">
-                <AlertCircle className="h-4 w-4 text-red-600" />
-                <AlertDescription className="text-red-800">{profileError}</AlertDescription>
+              <Alert className="border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20">
+                <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
+                <AlertDescription className="text-red-800 dark:text-red-200">{profileError}</AlertDescription>
               </Alert>
             )}
 
             {profileSuccess && (
-              <Alert className="border-green-200 bg-green-50">
-                <CheckCircle className="h-4 w-4 text-green-600" />
-                <AlertDescription className="text-green-800">{profileSuccess}</AlertDescription>
+              <Alert className="border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20">
+                <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                <AlertDescription className="text-green-800 dark:text-green-200">{profileSuccess}</AlertDescription>
               </Alert>
             )}
 
             <div className="flex items-center space-x-4">
               <Avatar className="h-16 w-16">
                 <AvatarImage src={user?.user_metadata?.avatar_url || "/placeholder.svg"} />
-                <AvatarFallback className="bg-teal-100 text-teal-700 text-lg">
+                <AvatarFallback className="bg-teal-100 dark:bg-teal-900 text-teal-700 dark:text-teal-300 text-lg">
                   <User className="h-8 w-8" />
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1">
-                <p className="text-sm text-gray-600">Photo de profil</p>
-                <p className="text-xs text-gray-500">Générée automatiquement à partir de votre nom</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t.profilePhoto}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-500">{t.autoGenerated}</p>
               </div>
             </div>
 
             <Separator />
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" value={user?.email || ""} disabled className="bg-gray-50" />
-              <p className="text-xs text-gray-500">L'email ne peut pas être modifié</p>
+              <Label htmlFor="email">{t.email}</Label>
+              <Input id="email" type="email" value={user?.email || ""} disabled className="bg-gray-50 dark:bg-gray-800" />
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t.emailCannotChange}</p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="fullName">Nom complet</Label>
+              <Label htmlFor="fullName">{t.fullName}</Label>
               <div className="flex space-x-2">
                 <Input
                   id="fullName"
@@ -893,37 +890,37 @@ export default function ChatPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Delete Account Dialog */}
+      {/* Delete Account Dialog with translations */}
       <Dialog open={deleteAccountDialogOpen} onOpenChange={setDeleteAccountDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-red-600">Supprimer le compte</DialogTitle>
+            <DialogTitle className="text-red-600 dark:text-red-400">{t.deleteAccountTitle}</DialogTitle>
             <DialogDescription>
-              Cette action est irréversible. Toutes vos conversations seront supprimées.
+              {t.deleteAccountDescription}
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
             {profileError && (
-              <Alert className="border-red-200 bg-red-50">
-                <AlertCircle className="h-4 w-4 text-red-600" />
-                <AlertDescription className="text-red-800">{profileError}</AlertDescription>
+              <Alert className="border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20">
+                <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
+                <AlertDescription className="text-red-800 dark:text-red-200">{profileError}</AlertDescription>
               </Alert>
             )}
 
-            <div className="flex items-center space-x-3 p-4 bg-red-50 rounded-lg border border-red-200">
-              <AlertTriangle className="h-6 w-6 text-red-600 flex-shrink-0" />
+            <div className="flex items-center space-x-3 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+              <AlertTriangle className="h-6 w-6 text-red-600 dark:text-red-400 flex-shrink-0" />
               <div>
-                <p className="text-sm font-medium text-red-800">Attention</p>
-                <p className="text-xs text-red-700">
-                  Cette action supprimera définitivement votre compte et toutes vos données.
+                <p className="text-sm font-medium text-red-800 dark:text-red-200">Attention</p>
+                <p className="text-xs text-red-700 dark:text-red-300">
+                  {t.deleteAccountWarning}
                 </p>
               </div>
             </div>
 
             <div className="flex space-x-2 justify-end">
               <Button variant="outline" onClick={() => setDeleteAccountDialogOpen(false)} disabled={profileLoading}>
-                Annuler
+                {t.cancel}
               </Button>
               <Button variant="destructive" onClick={deleteAccount} disabled={profileLoading}>
                 {profileLoading ? (
@@ -931,7 +928,7 @@ export default function ChatPage() {
                 ) : (
                   <Trash2 className="h-4 w-4 mr-2" />
                 )}
-                Supprimer définitivement
+                {t.deleteAccountConfirm}
               </Button>
             </div>
           </div>
