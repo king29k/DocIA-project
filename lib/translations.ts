@@ -6,129 +6,95 @@ export const translations = {
     services: "Services",
     features: "Fonctionnalités",
     diagnostic: "Diagnostic",
-    support: "Support 24/7",
-    login: "Se connecter",
+    support: "Support",
+    login: "Connexion",
 
     // Hero Section
-    heroTitle: "DOCAI : VOTRE ASSISTANT MÉDICAL INTELLIGENT",
-    heroDescription:
-      "DocIA est votre compagnon santé intelligent qui vous accompagne dans vos questions médicales avec des réponses fiables et personnalisées, disponible 24h/24 et 7j/7.",
+    heroTitle: "Votre Assistant Médical Intelligent",
+    heroDescription: "Obtenez des conseils médicaux personnalisés grâce à l'intelligence artificielle avancée.",
     startNow: "Commencer maintenant",
     learnMore: "En savoir plus",
+
+    // Statistics
     patients: "Patients",
     satisfaction: "Satisfaction",
     available: "Disponible",
 
     // Features
-    featuresTitle: "DÉCOUVREZ COMMENT INTERAGIR FACILEMENT AVEC DOCAI POUR VOS QUESTIONS DE SANTÉ.",
-    conversationTitle: "UNE CONVERSATION FLUIDE ET EMPATHIQUE",
-    conversationDesc:
-      "Posez vos questions de santé comme si vous parliez à un professionnel bienveillant qui vous comprend.",
-    questionsTitle: "POSEZ VOS QUESTIONS ET RECEVEZ DES RÉPONSES PERSONNALISÉES",
-    questionsDesc:
-      "Notre IA analyse vos questions et vous fournit des informations médicales adaptées à votre situation.",
-    experienceTitle: "PROFITEZ D'UNE EXPÉRIENCE UTILISATEUR INTUITIVE AVEC DOCAI",
-    experienceDesc: "Interface simple et sécurisée pour une expérience optimale dans vos recherches de santé.",
+    featuresTitle: "Découvrez nos fonctionnalités avancées",
+    conversationTitle: "Conversation naturelle",
+    conversationDesc: "Discutez avec notre IA comme avec un médecin expérimenté.",
+    questionsTitle: "Questions intelligentes",
+    questionsDesc: "Notre système pose les bonnes questions pour un diagnostic précis.",
+    experienceTitle: "Expérience personnalisée",
+    experienceDesc: "Chaque interaction est adaptée à votre profil médical unique.",
 
     // Precision Section
-    precision: "PRÉCISION",
-    precisionTitle: "UNE PRÉCISION INÉGALÉE POUR VOS DIAGNOSTICS",
+    precision: "Précision",
+    precisionTitle: "Diagnostic médical de haute précision",
     precisionDesc:
-      "Grâce à notre intelligence artificielle avancée, DocIA analyse vos symptômes avec précision et vous guide dans vos questions de santé avec des informations fiables et actualisées.",
-    reliableDiagnostic: "DIAGNOSTIC FIABLE",
-    reliableDiagnosticDesc: "Analyses basées sur des données médicales validées et des protocoles reconnus.",
-    empathicSupport: "SUPPORT EMPATHIQUE",
-    empathicSupportDesc: "Un accompagnement bienveillant adapté à vos besoins et préoccupations.",
-    tryNow: "Essayer",
+      "Notre intelligence artificielle analyse vos symptômes avec une précision remarquable pour vous fournir des conseils médicaux fiables.",
+    reliableDiagnostic: "Diagnostic fiable",
+    reliableDiagnosticDesc: "Basé sur des données médicales vérifiées",
+    empathicSupport: "Support empathique",
+    empathicSupportDesc: "Une approche humaine et bienveillante",
+    tryNow: "Essayer maintenant",
 
     // Support Features
-    supportFeaturesTitle: "DÉCOUVREZ LES FONCTIONNALITÉS DE DOCAI",
+    supportFeaturesTitle: "Un support médical complet",
     supportFeaturesDesc:
-      "DocIA offre des réponses instantanées et précises aux questions des patients. Grâce à son langage empathique, il facilite la compréhension des diagnostics et des soins.",
-    assistance247Title: "ASSISTANCE 24/7 POUR VOS QUESTIONS MÉDICALES",
-    assistance247Desc: "Accédez à des informations médicales à tout moment, jour et nuit.",
-    personalizedTitle: "RÉPONSES PERSONNALISÉES ET ADAPTÉES À CHAQUE PATIENT",
-    personalizedDesc: "Chaque réponse est adaptée à votre situation spécifique.",
-    intuitiveTitle: "INTERFACE INTUITIVE ET FACILE À UTILISER",
+      "Notre plateforme offre une gamme complète de services pour répondre à tous vos besoins de santé.",
+    assistance247Title: "Assistance 24/7",
+    assistance247Desc: "Support médical disponible à tout moment, jour et nuit.",
+    personalizedTitle: "Conseils personnalisés",
+    personalizedDesc: "Recommandations adaptées à votre historique médical.",
+    intuitiveTitle: "Interface intuitive",
     intuitiveDesc: "Une expérience utilisateur simple et accessible à tous.",
 
-    // CTA
-    ctaTitle: "DISCUTEZ AVEC DOCAI MAINTENANT",
-    ctaDesc: "Posez vos questions sur la santé en toute confiance.",
-    getStarted: "Se lancer dès maintenant",
+    // CTA Section
+    ctaTitle: "Prêt à améliorer votre santé ?",
+    ctaDesc: "Rejoignez des milliers d'utilisateurs qui font confiance à DocIA pour leurs besoins médicaux.",
+    getStarted: "Commencer",
 
-    // Blog
+    // Blog Section
     blog: "Blog",
-    healthResources: "RESSOURCES SANTÉ",
+    healthResources: "Ressources Santé",
     healthResourcesDesc: "Découvrez nos articles et guides pour mieux comprendre votre santé.",
-    medicationsTitle: "COMPRENDRE LES MÉDICAMENTS COURANTS",
-    medicationsDesc: "Découvrez les effets et utilisations des médicaments.",
-    healthyLifeTitle: "CONSEILS POUR UNE VIE SAINE",
-    healthyLifeDesc: "Adoptez des habitudes saines pour améliorer votre bien-être.",
-    resultsTitle: "INTERPRÉTER VOS RÉSULTATS MÉDICAUX",
-    resultsDesc: "Comprenez vos résultats pour mieux discuter avec votre médecin.",
+    medicationsTitle: "Guide des médicaments",
+    medicationsDesc: "Tout savoir sur vos traitements et leurs effets.",
+    healthyLifeTitle: "Vie saine",
+    healthyLifeDesc: "Conseils pour adopter un mode de vie plus sain.",
+    resultsTitle: "Comprendre vos résultats",
+    resultsDesc: "Interprétation de vos analyses médicales.",
 
     // Footer
     product: "Produit",
     company: "Entreprise",
     resources: "Ressources",
     legal: "Légal",
-    subscribe: "S'abonner",
-    subscribeDesc: "Restez informé de nos actualités",
+    copyright: "© 2024 DocIA. Tous droits réservés.",
+    subscribeDesc: "Restez informé des dernières actualités santé",
     enterEmail: "Votre email",
-    copyright: "© 2025 DocIA - Douala General Hospital. Tous droits réservés.",
+    subscribe: "S'abonner",
 
-    // Auth Page
-    backToHome: "Retour à l'accueil",
-    intelligentHealthAssistant: "Assistant Santé Intelligent",
-    welcomeToHealthSpace: "Bienvenue dans votre espace santé",
-    connectToAccess: "Connectez-vous pour accéder à votre assistant médical personnel",
-    checking: "Vérification...",
-    connected: "Connecté",
-    disconnected: "Déconnecté",
-    secureAccess: "Accès Sécurisé",
-    connectOrCreate: "Connectez-vous ou créez un compte pour commencer votre suivi médical",
-    connection: "Connexion",
-    registration: "Inscription",
-    continueWithGoogle: "Continuer avec Google",
-    orWithEmail: "Ou avec votre email",
-    emailAddress: "Adresse email",
-    password: "Mot de passe",
-    forgotPassword: "Mot de passe oublié ?",
+    // Auth
     signIn: "Se connecter",
-    fullName: "Nom complet",
+    signUp: "S'inscrire",
+    email: "Email",
+    password: "Mot de passe",
     confirmPassword: "Confirmer le mot de passe",
-    createAccount: "Créer mon compte",
-    acceptTerms: "En continuant, vous acceptez nos",
-    termsOfUse: "conditions d'utilisation",
-    and: "et notre",
-    privacyPolicy: "politique de confidentialité",
-    support: "Support",
-    diagnostic: "Diagnostic",
-
-    // Password Reset
+    forgotPassword: "Mot de passe oublié ?",
     resetPassword: "Réinitialiser le mot de passe",
-    resetPasswordDesc: "Entrez votre adresse email pour recevoir un lien de réinitialisation.",
-    sendResetLink: "Envoyer le lien",
-    resetEmailSent: "Email de réinitialisation envoyé ! Vérifiez votre boîte de réception.",
-    newPassword: "Nouveau mot de passe",
-    confirmNewPassword: "Confirmer le nouveau mot de passe",
-    updatePassword: "Mettre à jour le mot de passe",
-    passwordUpdated: "Mot de passe mis à jour avec succès !",
+    sendResetLink: "Envoyer le lien de réinitialisation",
+    backToLogin: "Retour à la connexion",
 
-    // Validation Messages
-    enterValidEmail: "Veuillez entrer une adresse email valide.",
-    passwordMinLength: "Le mot de passe doit contenir au moins 6 caractères.",
-    passwordsNotMatch: "Les mots de passe ne correspondent pas.",
-    enterFullName: "Veuillez entrer votre nom complet.",
-    invalidCredentials: "Email ou mot de passe incorrect. Vérifiez vos identifiants.",
-    emailNotConfirmed: "Veuillez confirmer votre email avant de vous connecter.",
-    tooManyRequests: "Trop de tentatives de connexion. Veuillez patienter quelques minutes.",
-    userAlreadyExists: "Un compte existe déjà avec cette adresse email.",
-    accountCreated: "Compte créé avec succès ! Redirection en cours...",
-    checkEmailConfirm: "Compte créé ! Vérifiez votre email pour confirmer votre inscription.",
-    connectionSuccess: "Connexion réussie ! Redirection en cours...",
-    sessionCheck: "Vérification de votre session...",
+    // Voice Settings
+    voiceSettings: "Paramètres Vocaux",
+    selectVoice: "Sélectionner une voix",
+    voiceSpeed: "Vitesse",
+    voicePitch: "Tonalité",
+    testVoice: "Tester la voix",
+    voicePreview: "Bonjour, je suis votre assistant médical DocIA. Comment puis-je vous aider aujourd'hui ?",
   },
   en: {
     // Navigation
@@ -137,133 +103,99 @@ export const translations = {
     services: "Services",
     features: "Features",
     diagnostic: "Diagnostic",
-    support: "24/7 Support",
-    login: "Sign In",
+    support: "Support",
+    login: "Login",
 
     // Hero Section
-    heroTitle: "DOCAI: YOUR INTELLIGENT MEDICAL ASSISTANT",
-    heroDescription:
-      "DocIA is your intelligent health companion that assists you with your medical questions with reliable and personalized answers, available 24/7.",
-    startNow: "Get Started Now",
+    heroTitle: "Your Intelligent Medical Assistant",
+    heroDescription: "Get personalized medical advice through advanced artificial intelligence.",
+    startNow: "Start Now",
     learnMore: "Learn More",
+
+    // Statistics
     patients: "Patients",
     satisfaction: "Satisfaction",
     available: "Available",
 
     // Features
-    featuresTitle: "DISCOVER HOW TO EASILY INTERACT WITH DOCAI FOR YOUR HEALTH QUESTIONS.",
-    conversationTitle: "FLUID AND EMPATHETIC CONVERSATION",
-    conversationDesc: "Ask your health questions as if you were talking to a caring professional who understands you.",
-    questionsTitle: "ASK QUESTIONS AND RECEIVE PERSONALIZED ANSWERS",
-    questionsDesc: "Our AI analyzes your questions and provides medical information tailored to your situation.",
-    experienceTitle: "ENJOY AN INTUITIVE USER EXPERIENCE WITH DOCAI",
-    experienceDesc: "Simple and secure interface for an optimal experience in your health research.",
+    featuresTitle: "Discover our advanced features",
+    conversationTitle: "Natural conversation",
+    conversationDesc: "Chat with our AI like with an experienced doctor.",
+    questionsTitle: "Smart questions",
+    questionsDesc: "Our system asks the right questions for accurate diagnosis.",
+    experienceTitle: "Personalized experience",
+    experienceDesc: "Every interaction is tailored to your unique medical profile.",
 
     // Precision Section
-    precision: "PRECISION",
-    precisionTitle: "UNMATCHED PRECISION FOR YOUR DIAGNOSTICS",
+    precision: "Precision",
+    precisionTitle: "High-precision medical diagnosis",
     precisionDesc:
-      "Thanks to our advanced artificial intelligence, DocIA analyzes your symptoms with precision and guides you in your health questions with reliable and updated information.",
-    reliableDiagnostic: "RELIABLE DIAGNOSTIC",
-    reliableDiagnosticDesc: "Analyses based on validated medical data and recognized protocols.",
-    empathicSupport: "EMPATHETIC SUPPORT",
-    empathicSupportDesc: "Caring support adapted to your needs and concerns.",
+      "Our artificial intelligence analyzes your symptoms with remarkable precision to provide you with reliable medical advice.",
+    reliableDiagnostic: "Reliable diagnosis",
+    reliableDiagnosticDesc: "Based on verified medical data",
+    empathicSupport: "Empathetic support",
+    empathicSupportDesc: "A human and caring approach",
     tryNow: "Try Now",
 
     // Support Features
-    supportFeaturesTitle: "DISCOVER DOCAI'S FEATURES",
-    supportFeaturesDesc:
-      "DocIA offers instant and accurate responses to patient questions. Thanks to its empathetic language, it facilitates understanding of diagnoses and care.",
-    assistance247Title: "24/7 ASSISTANCE FOR YOUR MEDICAL QUESTIONS",
-    assistance247Desc: "Access medical information anytime, day and night.",
-    personalizedTitle: "PERSONALIZED RESPONSES ADAPTED TO EACH PATIENT",
-    personalizedDesc: "Each response is tailored to your specific situation.",
-    intuitiveTitle: "INTUITIVE AND EASY-TO-USE INTERFACE",
+    supportFeaturesTitle: "Complete medical support",
+    supportFeaturesDesc: "Our platform offers a complete range of services to meet all your health needs.",
+    assistance247Title: "24/7 Assistance",
+    assistance247Desc: "Medical support available anytime, day and night.",
+    personalizedTitle: "Personalized advice",
+    personalizedDesc: "Recommendations tailored to your medical history.",
+    intuitiveTitle: "Intuitive interface",
     intuitiveDesc: "A simple and accessible user experience for everyone.",
 
-    // CTA
-    ctaTitle: "CHAT WITH DOCAI NOW",
-    ctaDesc: "Ask your health questions with confidence.",
-    getStarted: "Get Started Now",
+    // CTA Section
+    ctaTitle: "Ready to improve your health?",
+    ctaDesc: "Join thousands of users who trust DocIA for their medical needs.",
+    getStarted: "Get Started",
 
-    // Blog
+    // Blog Section
     blog: "Blog",
-    healthResources: "HEALTH RESOURCES",
+    healthResources: "Health Resources",
     healthResourcesDesc: "Discover our articles and guides to better understand your health.",
-    medicationsTitle: "UNDERSTANDING COMMON MEDICATIONS",
-    medicationsDesc: "Discover the effects and uses of medications.",
-    healthyLifeTitle: "TIPS FOR A HEALTHY LIFE",
-    healthyLifeDesc: "Adopt healthy habits to improve your well-being.",
-    resultsTitle: "INTERPRETING YOUR MEDICAL RESULTS",
-    resultsDesc: "Understand your results to better discuss with your doctor.",
+    medicationsTitle: "Medication Guide",
+    medicationsDesc: "Everything you need to know about your treatments and their effects.",
+    healthyLifeTitle: "Healthy Living",
+    healthyLifeDesc: "Tips for adopting a healthier lifestyle.",
+    resultsTitle: "Understanding your results",
+    resultsDesc: "Interpretation of your medical analyses.",
 
     // Footer
     product: "Product",
     company: "Company",
     resources: "Resources",
     legal: "Legal",
-    subscribe: "Subscribe",
-    subscribeDesc: "Stay informed about our news",
+    copyright: "© 2024 DocIA. All rights reserved.",
+    subscribeDesc: "Stay informed about the latest health news",
     enterEmail: "Your email",
-    copyright: "© 2025 DocIA - Douala General Hospital. All rights reserved.",
+    subscribe: "Subscribe",
 
-    // Auth Page
-    backToHome: "Back to Home",
-    intelligentHealthAssistant: "Intelligent Health Assistant",
-    welcomeToHealthSpace: "Welcome to your health space",
-    connectToAccess: "Sign in to access your personal medical assistant",
-    checking: "Checking...",
-    connected: "Connected",
-    disconnected: "Disconnected",
-    secureAccess: "Secure Access",
-    connectOrCreate: "Sign in or create an account to start your medical follow-up",
-    connection: "Sign In",
-    registration: "Sign Up",
-    continueWithGoogle: "Continue with Google",
-    orWithEmail: "Or with your email",
-    emailAddress: "Email Address",
-    password: "Password",
-    forgotPassword: "Forgot Password?",
+    // Auth
     signIn: "Sign In",
-    fullName: "Full Name",
+    signUp: "Sign Up",
+    email: "Email",
+    password: "Password",
     confirmPassword: "Confirm Password",
-    createAccount: "Create Account",
-    acceptTerms: "By continuing, you accept our",
-    termsOfUse: "terms of use",
-    and: "and our",
-    privacyPolicy: "privacy policy",
-    support: "Support",
-    diagnostic: "Diagnostic",
-
-    // Password Reset
+    forgotPassword: "Forgot Password?",
     resetPassword: "Reset Password",
-    resetPasswordDesc: "Enter your email address to receive a reset link.",
     sendResetLink: "Send Reset Link",
-    resetEmailSent: "Reset email sent! Check your inbox.",
-    newPassword: "New Password",
-    confirmNewPassword: "Confirm New Password",
-    updatePassword: "Update Password",
-    passwordUpdated: "Password updated successfully!",
+    backToLogin: "Back to Login",
 
-    // Validation Messages
-    enterValidEmail: "Please enter a valid email address.",
-    passwordMinLength: "Password must be at least 6 characters long.",
-    passwordsNotMatch: "Passwords do not match.",
-    enterFullName: "Please enter your full name.",
-    invalidCredentials: "Invalid email or password. Check your credentials.",
-    emailNotConfirmed: "Please confirm your email before signing in.",
-    tooManyRequests: "Too many login attempts. Please wait a few minutes.",
-    userAlreadyExists: "An account already exists with this email address.",
-    accountCreated: "Account created successfully! Redirecting...",
-    checkEmailConfirm: "Account created! Check your email to confirm your registration.",
-    connectionSuccess: "Sign in successful! Redirecting...",
-    sessionCheck: "Checking your session...",
+    // Voice Settings
+    voiceSettings: "Voice Settings",
+    selectVoice: "Select Voice",
+    voiceSpeed: "Speed",
+    voicePitch: "Pitch",
+    testVoice: "Test Voice",
+    voicePreview: "Hello, I am your medical assistant DocIA. How can I help you today?",
   },
 }
 
-export type Language = keyof typeof translations
-export type TranslationKey = keyof typeof translations.fr
-
-export function getTranslation(language: Language, key: TranslationKey): string {
-  return translations[language][key] || translations.fr[key]
+export function getTranslation(language: string, key: string): string {
+  const lang = language as keyof typeof translations
+  const translation = translations[lang]?.[key as keyof typeof translation]
+  return translation || key
 }
