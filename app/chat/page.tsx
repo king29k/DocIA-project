@@ -48,7 +48,7 @@ import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { VoiceInput, TextToSpeech, FileUploadButton } from "@/components/voice-input"
 import { TypingMarkdown } from "@/components/typing-effect"
-import { AlertCircle } from "lucide-react" // Import AlertCircle
+import { AlertCircle } from "lucide-react"
 import { useTheme } from "@/lib/theme-context"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
@@ -98,7 +98,7 @@ export default function ChatPage() {
       icon: Heart,
       title: t.cardiology,
       question: t.cardiovascularPrevention,
-      color: "bg-red-500",
+      color: "bg-red-3000",
       textColor: "text-red-600",
     },
     {
@@ -423,8 +423,8 @@ export default function ChatPage() {
                 <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-900"></div>
               </div>
               <div>
-                <span className="font-bold text-teal-900 dark:text-teal-100 text-lg">DocIA</span>
-                <p className="text-xs text-teal-600 dark:text-teal-400">Assistant Santé</p>
+                <span className="font-bold text-black dark:text-teal-100 text-lg">DocIA</span>
+                <p className="text-xs text-black dark:text-teal-400">Assistant Santé</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
@@ -445,7 +445,7 @@ export default function ChatPage() {
           </Button>
         </div>
 
-        {/* Rest of sidebar content with responsive improvements... */}
+        {/* Rest of sidebar content */}
         <ScrollArea className="flex-1 p-2 sm:p-4">
           <div className="space-y-2">
             {conversations.map((conversation) => (
@@ -465,9 +465,9 @@ export default function ChatPage() {
                 >
                   <MessageCircle className="h-4 w-4 mr-3 flex-shrink-0 text-teal-600 dark:text-teal-400" />
                   <div className="flex-1 min-w-0">
-                    <div className="truncate font-medium text-sm dark:text-gray-200">{conversation.title}</div>
+                    <div className="truncate font-medium text-sm text-black dark:text-gray-200">{conversation.title}</div>
                     <div className="flex items-center gap-2 mt-1">
-                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                      <div className="text-xs text-black dark:text-gray-400">
                         {new Date(conversation.updated_at).toLocaleDateString()}
                       </div>
                       {conversation.message_count && (
@@ -482,7 +482,7 @@ export default function ChatPage() {
                   variant="ghost"
                   size="sm"
                   onClick={(e) => deleteConversation(conversation.id, e)}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-red-500"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity text-black dark:text-gray-400 hover:text-red-500"
                 >
                   <Trash2 className="h-3 w-3" />
                 </Button>
@@ -502,10 +502,10 @@ export default function ChatPage() {
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium truncate text-teal-900 dark:text-teal-100">
+                <div className="text-sm font-medium truncate text-black dark:text-teal-100">
                   {user?.user_metadata?.full_name || user?.email}
                 </div>
-                <div className="text-xs text-teal-600 dark:text-teal-400">{t.patient}</div>
+                <div className="text-xs text-black dark:text-teal-400">{t.patient}</div>
               </div>
             </div>
 
@@ -514,7 +514,7 @@ export default function ChatPage() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-gray-500 hover:text-teal-600 dark:text-gray-400 dark:hover:text-teal-400"
+                  className="text-black dark:text-gray-400 hover:text-teal-600 dark:hover:text-teal-400"
                 >
                   <Settings className="h-4 w-4" />
                 </Button>
@@ -560,21 +560,21 @@ export default function ChatPage() {
                   <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                 </div>
                 <div className="hidden sm:block">
-                  <h1 className="font-bold text-teal-900 dark:text-teal-100 text-lg">DocIA Assistant</h1>
-                  <p className="text-sm text-teal-600 dark:text-teal-400">Douala General Hospital • {t.online}</p>
+                  <h1 className="font-bold text-black dark:text-teal-100 text-lg">DocIA Assistant</h1>
+                  <p className="text-sm text-black dark:text-teal-400">Douala General Hospital • {t.online}</p>
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Badge
                 variant="secondary"
-                className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700 hidden sm:inline-flex"
+                className="bg-green-100 dark:bg-green-900/30 text-black dark:text-green-300 border-green-200 dark:border-green-700 hidden sm:inline-flex"
               >
                 ✓ {t.secured}
               </Badge>
               <Badge
                 variant="outline"
-                className="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700 hidden sm:inline-flex"
+                className="bg-blue-50 dark:bg-blue-900/30 text-black dark:text-blue-300 border-blue-200 dark:border-blue-700 hidden sm:inline-flex"
               >
                 GPT-Neo AI
               </Badge>
@@ -586,7 +586,7 @@ export default function ChatPage() {
         <ScrollArea className="flex-1">
           <div className="container-responsive py-4 sm:py-6">
             {showWelcome ? (
-              /* Welcome Screen with responsive improvements */
+              /* Welcome Screen */
               <div className="text-center py-8 sm:py-12 space-y-6 sm:space-y-8">
                 {/* Logo and main title */}
                 <div className="space-y-4 sm:space-y-6">
@@ -601,7 +601,7 @@ export default function ChatPage() {
                     <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mb-3">
                       {t.welcomeTitle}
                     </h1>
-                    <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg max-w-2xl mx-auto px-4">
+                    <p className="text-black dark:text-gray-300 text-base sm:text-lg max-w-2xl mx-auto px-4">
                       {t.welcomeDescription}
                     </p>
                   </div>
@@ -635,17 +635,17 @@ export default function ChatPage() {
 
                     {/* Character counter */}
                     <div className="flex justify-between items-center mt-3 px-2 text-xs sm:text-sm">
-                      <p className="text-gray-500 dark:text-gray-400">
+                      <p className="text-black dark:text-gray-400">
                         DocIA peut analyser vos documents médicaux et images. Parlez ou tapez votre question.
                       </p>
-                      <span className="text-gray-400 dark:text-gray-500">{input.length}/1000</span>
+                      <span className="text-black dark:text-gray-500">{input.length}/1000</span>
                     </div>
                   </form>
                 </div>
 
                 {/* Health suggestions */}
                 <div className="space-y-4 sm:space-y-6">
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
+                  <h3 className="text-lg sm:text-xl font-semibold text-black dark:text-gray-200">
                     {t.popularSuggestions}
                   </h3>
                   <div className="grid-responsive max-w-6xl mx-auto px-4">
@@ -676,10 +676,10 @@ export default function ChatPage() {
                                 />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors text-sm sm:text-base">
+                                <h4 className="font-semibold text-black dark:text-gray-400 mb-2 group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors text-sm sm:text-base">
                                   {suggestion.title}
                                 </h4>
-                                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <p className="text-xs sm:text-sm text-black dark:text-gray-400 leading-relaxed">
                                   {suggestion.question}
                                 </p>
                               </div>
@@ -693,11 +693,11 @@ export default function ChatPage() {
 
                 {/* Footer */}
                 <div className="pt-6 sm:pt-8 border-t border-gray-200 dark:border-gray-700 mt-8 sm:mt-12">
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 px-4">{t.copyright}</p>
+                  <p className="text-xs sm:text-sm text-black dark:text-gray-400 px-4">{t.copyright}</p>
                 </div>
               </div>
             ) : (
-              /* Messages conversation with responsive improvements */
+              /* Messages conversation */
               <div className="space-y-4 sm:space-y-6">
                 {messages.map((message) => (
                   <div
@@ -729,10 +729,10 @@ export default function ChatPage() {
                           text={message.content}
                           speed={20}
                           onComplete={() => setTypingMessageId(null)}
-                          className="text-sm leading-relaxed dark:text-gray-200"
+                          className="text-sm leading-relaxed text-black dark:text-gray-200"
                         />
                       ) : (
-                        <div className="whitespace-pre-wrap text-sm leading-relaxed dark:text-gray-200">
+                        <div className="whitespace-pre-wrap text-sm leading-relaxed text-black dark:text-gray-200">
                           {message.content}
                         </div>
                       )}
@@ -742,7 +742,7 @@ export default function ChatPage() {
                           <div
                             className={cn(
                               "text-xs opacity-70",
-                              message.role === "user" ? "text-teal-100" : "text-gray-500 dark:text-gray-400",
+                              message.role === "user" ? "text-teal-100" : "text-black dark:text-gray-400",
                             )}
                           >
                             {new Date(message.created_at).toLocaleTimeString("fr-FR", {
@@ -838,17 +838,17 @@ export default function ChatPage() {
         )}
       </div>
 
-      {/* Profile Dialog with translations */}
+      {/* Profile Dialog */}
       <Dialog open={profileDialogOpen} onOpenChange={setProfileDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>{t.modifyProfile}</DialogTitle>
-            <DialogDescription>Modifiez vos informations personnelles</DialogDescription>
+            <DialogTitle className="text-black dark:text-gray-200">{t.modifyProfile}</DialogTitle>
+            <DialogDescription className="text-black dark:text-gray-400">Modifiez vos informations personnelles</DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
             {profileError && (
-              <Alert className="border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20">
+              <Alert className="border-red-200 dark:border-red-800 bg-red-300 dark:bg-red-900/20">
                 <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
                 <AlertDescription className="text-red-800 dark:text-red-200">{profileError}</AlertDescription>
               </Alert>
@@ -869,27 +869,27 @@ export default function ChatPage() {
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1">
-                <p className="text-sm text-gray-600 dark:text-gray-400">{t.profilePhoto}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-500">{t.autoGenerated}</p>
+                <p className="text-sm text-black dark:text-gray-400">{t.profilePhoto}</p>
+                <p className="text-xs text-black dark:text-gray-500">{t.autoGenerated}</p>
               </div>
             </div>
 
             <Separator />
 
             <div className="space-y-2">
-              <Label htmlFor="email">{t.email}</Label>
+              <Label htmlFor="email" className="text-black dark:text-gray-200">{t.email}</Label>
               <Input
                 id="email"
                 type="email"
                 value={user?.email || ""}
                 disabled
-                className="bg-gray-50 dark:bg-gray-800"
+                className="bg-gray-200 dark:bg-gray-800"
               />
-              <p className="text-xs text-gray-500 dark:text-gray-400">{t.emailCannotChange}</p>
+              <p className="text-xs text-black dark:text-gray-400">{t.emailCannotChange}</p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="fullName">{t.fullName}</Label>
+              <Label htmlFor="fullName" className="text-black dark:text-gray-400">{t.fullName}</Label>
               <div className="flex space-x-2">
                 <Input
                   id="fullName"
@@ -943,23 +943,23 @@ export default function ChatPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Delete Account Dialog with translations */}
+      {/* Delete Account Dialog */}
       <Dialog open={deleteAccountDialogOpen} onOpenChange={setDeleteAccountDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-red-600 dark:text-red-400">{t.deleteAccountTitle}</DialogTitle>
-            <DialogDescription>{t.deleteAccountDescription}</DialogDescription>
+            <DialogDescription className="text-black dark:text-gray-400">{t.deleteAccountDescription}</DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
             {profileError && (
-              <Alert className="border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20">
+              <Alert className="border-red-200 dark:border-red-800 bg-red-300 dark:bg-red-900/20">
                 <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
                 <AlertDescription className="text-red-800 dark:text-red-200">{profileError}</AlertDescription>
               </Alert>
             )}
 
-            <div className="flex items-center space-x-3 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+            <div className="flex items-center space-x-3 p-4 bg-red-300 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
               <AlertTriangle className="h-6 w-6 text-red-600 dark:text-red-400 flex-shrink-0" />
               <div>
                 <p className="text-sm font-medium text-red-800 dark:text-red-200">Attention</p>

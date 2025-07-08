@@ -1,0 +1,9 @@
+{
+  "/api/chat/enhanced/route": "/api/chat/enhanced",
+  "/_not-found/page": "/_not-found",
+  "/api/chat/route": "/api/chat",
+  "/auth/page": "/auth",
+  "/chat/page": "/chat",
+  "/auth/debug/page": "/auth/debug",
+  "/page": "/"
+}
