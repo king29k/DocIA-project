@@ -1,0 +1,39 @@
+{
+  "diabetes": {
+    "en": {
+      "definition": "Diabetes is a chronic condition where the body cannot properly regulate blood sugar levels due to insufficient insulin production or ineffective use of insulin.",
+      "symptoms": ["Excessive thirst (polydipsia)", "Frequent urination (polyuria)", "Extreme hunger", "Unexplained weight loss", "Fatigue", "Blurred vision", "Slow-healing sores"],
+      "common_treatments": [
+        {
+          "name": "Metformin",
+          "type": "Oral medication",
+          "purpose": "Lowers glucose production in liver"
+        },
+        {
+          "name": "Insulin therapy",
+          "type": "Injection",
+          "purpose": "Regulates blood sugar"
+        }
+      ],
+      "emergency_signs": ["Confusion", "Rapid breathing", "Fruity-smelling breath", "Abdominal pain"]
+    },
+    "fr": {
+      "definition": "Le diabète est une maladie chronique où le corps ne peut pas réguler correctement la glycémie en raison d'une production insuffisante d'insuline ou d'une utilisation inefficace de l'insuline.",
+      "symptoms": ["Soif excessive (polydipsie)", "Mictions fréquentes (polyurie)", "Faim extrême", "Perte de poids inexpliquée", "Fatigue", "Vision floue", "Plaies à guérison lente"],
+      "common_treatments": [
+        {
+          "name": "Metformine",
+          "type": "Médicament oral",
+          "purpose": "Réduit la production de glucose dans le foie"
+        }
+      ]
+    }
+  },
+  "hypertension": {
+    "en": {
+      "definition": "Hypertension (high blood pressure) is a condition where the force of blood against artery walls is consistently too high (≥130/80 mmHg).",
+      "risk_factors": ["Obesity", "High salt intake", "Alcohol overuse", "Family history"],
+      "recommended_diet": ["DASH diet", "Low sodium (<1500mg/day)", "Potassium-rich foods"]
+    }
+  }
+}
