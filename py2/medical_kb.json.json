@@ -1,8 +1,16 @@
 {
   "diabetes": {
     "en": {
-      "definition": "Diabetes is a chronic condition where the body cannot properly regulate blood sugar levels due to insufficient insulin production or ineffective use of insulin.",
-      "symptoms": ["Excessive thirst (polydipsia)", "Frequent urination (polyuria)", "Extreme hunger", "Unexplained weight loss", "Fatigue", "Blurred vision", "Slow-healing sores"],
+      "definition": "Diabetes is a chronic metabolic disorder characterized by high blood sugar levels due to insufficient insulin production or ineffective use of insulin. Causes include genetic predisposition, obesity, and sedentary lifestyle. Long-term complications can affect the heart, kidneys, nerves, and eyes. Prevention involves healthy eating, regular exercise, and weight control.",
+      "symptoms": [
+        "Excessive thirst (polydipsia)",
+        "Frequent urination (polyuria)",
+        "Extreme hunger",
+        "Unexplained weight loss",
+        "Fatigue",
+        "Blurred vision",
+        "Slow-healing sores"
+      ],
       "common_treatments": [
         {
           "name": "Metformin",
@@ -13,27 +21,1118 @@
           "name": "Insulin therapy",
           "type": "Injection",
           "purpose": "Regulates blood sugar"
+        },
+        {
+          "name": "Lifestyle modification",
+          "type": "Non-pharmacological",
+          "purpose": "Diet and exercise to improve glucose control"
         }
       ],
-      "emergency_signs": ["Confusion", "Rapid breathing", "Fruity-smelling breath", "Abdominal pain"]
+      "risk_factors": [
+        "Family history",
+        "Obesity",
+        "Physical inactivity",
+        "Poor diet",
+        "Age over 45"
+      ],
+      "prevention": [
+        "Maintain healthy weight",
+        "Exercise regularly",
+        "Eat balanced diet",
+        "Monitor blood sugar"
+      ],
+      "emergency_signs": [
+        "Confusion",
+        "Rapid breathing",
+        "Fruity-smelling breath",
+        "Abdominal pain"
+      ]
     },
     "fr": {
-      "definition": "Le diabète est une maladie chronique où le corps ne peut pas réguler correctement la glycémie en raison d'une production insuffisante d'insuline ou d'une utilisation inefficace de l'insuline.",
-      "symptoms": ["Soif excessive (polydipsie)", "Mictions fréquentes (polyurie)", "Faim extrême", "Perte de poids inexpliquée", "Fatigue", "Vision floue", "Plaies à guérison lente"],
+      "definition": "Le diabète est une maladie métabolique chronique caractérisée par une hyperglycémie due à une production insuffisante d'insuline ou à une utilisation inefficace de l'insuline. Les causes incluent la prédisposition génétique, l'obésité et la sédentarité. Les complications à long terme touchent le cœur, les reins, les nerfs et les yeux. La prévention repose sur une alimentation saine, l'activité physique et le contrôle du poids.",
+      "symptoms": [
+        "Soif excessive (polydipsie)",
+        "Mictions fréquentes (polyurie)",
+        "Faim extrême",
+        "Perte de poids inexpliquée",
+        "Fatigue",
+        "Vision floue",
+        "Plaies à guérison lente"
+      ],
       "common_treatments": [
         {
           "name": "Metformine",
           "type": "Médicament oral",
           "purpose": "Réduit la production de glucose dans le foie"
+        },
+        {
+          "name": "Insulinothérapie",
+          "type": "Injection",
+          "purpose": "Régule la glycémie"
+        },
+        {
+          "name": "Modification du mode de vie",
+          "type": "Non pharmacologique",
+          "purpose": "Régime alimentaire et exercice pour améliorer le contrôle glycémique"
         }
+      ],
+      "risk_factors": [
+        "Antécédents familiaux",
+        "Obésité",
+        "Sédentarité",
+        "Alimentation déséquilibrée",
+        "Âge supérieur à 45 ans"
+      ],
+      "prevention": [
+        "Maintenir un poids sain",
+        "Faire de l'exercice régulièrement",
+        "Adopter une alimentation équilibrée",
+        "Surveiller la glycémie"
+      ],
+      "emergency_signs": [
+        "Confusion",
+        "Respiration rapide",
+        "Haleine à odeur fruitée",
+        "Douleur abdominale"
       ]
     }
   },
   "hypertension": {
     "en": {
-      "definition": "Hypertension (high blood pressure) is a condition where the force of blood against artery walls is consistently too high (≥130/80 mmHg).",
-      "risk_factors": ["Obesity", "High salt intake", "Alcohol overuse", "Family history"],
-      "recommended_diet": ["DASH diet", "Low sodium (<1500mg/day)", "Potassium-rich foods"]
+      "definition": "Hypertension (high blood pressure) is a chronic condition where the force of blood against artery walls is consistently too high (≥130/80 mmHg). Causes include genetics, high salt intake, obesity, and stress. It increases the risk of heart attack, stroke, kidney disease, and other serious health problems. Prevention includes reducing salt intake, regular exercise, and stress management.",
+      "risk_factors": [
+        "Obesity",
+        "High salt intake",
+        "Alcohol overuse",
+        "Family history",
+        "Physical inactivity",
+        "Chronic stress"
+      ],
+      "recommended_diet": [
+        "DASH diet",
+        "Low sodium (<1500mg/day)",
+        "Potassium-rich foods",
+        "Increase fruits and vegetables"
+      ],
+      "symptoms": [
+        "Headaches",
+        "Shortness of breath",
+        "Nosebleeds",
+        "Fatigue",
+        "Chest pain"
+      ],
+      "complications": [
+        "Heart attack",
+        "Stroke",
+        "Kidney failure",
+        "Vision loss"
+      ],
+      "prevention": [
+        "Reduce salt intake",
+        "Exercise regularly",
+        "Limit alcohol",
+        "Manage stress"
+      ]
+    },
+    "fr": {
+      "definition": "L'hypertension artérielle est une maladie chronique où la pression du sang contre les parois des artères est constamment trop élevée (≥130/80 mmHg). Les causes incluent la génétique, la consommation excessive de sel, l'obésité et le stress. Elle augmente le risque d'infarctus, d'AVC, d'insuffisance rénale et d'autres problèmes graves. La prévention inclut la réduction du sel, l'exercice régulier et la gestion du stress.",
+      "risk_factors": [
+        "Obésité",
+        "Consommation excessive de sel",
+        "Abus d'alcool",
+        "Antécédents familiaux",
+        "Sédentarité",
+        "Stress chronique"
+      ],
+      "recommended_diet": [
+        "Régime DASH",
+        "Faible teneur en sodium (<1500mg/jour)",
+        "Aliments riches en potassium",
+        "Augmenter fruits et légumes"
+      ],
+      "symptoms": [
+        "Maux de tête",
+        "Essoufflement",
+        "Saignements de nez",
+        "Fatigue",
+        "Douleur thoracique"
+      ],
+      "complications": [
+        "Infarctus",
+        "AVC",
+        "Insuffisance rénale",
+        "Perte de vision"
+      ],
+      "prevention": [
+        "Réduire la consommation de sel",
+        "Faire de l'exercice régulièrement",
+        "Limiter l'alcool",
+        "Gérer le stress"
+      ]
+    }
+  },
+  "asthma": {
+    "en": {
+      "definition": "Asthma is a chronic respiratory condition characterized by inflammation and narrowing of the airways, causing difficulty in breathing, wheezing, and coughing. Triggers include allergens, exercise, and infections. Prevention involves avoiding triggers and using prescribed medications. Severe attacks can be life-threatening.",
+      "symptoms": [
+        "Shortness of breath",
+        "Wheezing",
+        "Chest tightness",
+        "Coughing, especially at night"
+      ],
+      "common_treatments": [
+        {
+          "name": "Inhaled corticosteroids",
+          "type": "Inhaler",
+          "purpose": "Reduces airway inflammation"
+        },
+        {
+          "name": "Bronchodilators",
+          "type": "Inhaler",
+          "purpose": "Relaxes airway muscles"
+        }
+      ],
+      "triggers": [
+        "Dust mites",
+        "Pollen",
+        "Exercise",
+        "Respiratory infections",
+        "Smoke"
+      ],
+      "prevention": [
+        "Avoid known triggers",
+        "Use preventive inhalers",
+        "Monitor symptoms"
+      ],
+      "emergency_signs": [
+        "Severe shortness of breath",
+        "Blue lips or face",
+        "Difficulty speaking"
+      ]
+    },
+    "fr": {
+      "definition": "L'asthme est une maladie respiratoire chronique caractérisée par une inflammation et un rétrécissement des voies respiratoires, entraînant des difficultés à respirer, des sifflements et de la toux. Les déclencheurs incluent les allergènes, l'exercice et les infections. La prévention repose sur l'évitement des facteurs déclenchants et l'utilisation des médicaments prescrits. Les crises sévères peuvent être mortelles.",
+      "symptoms": [
+        "Essoufflement",
+        "Sifflements respiratoires",
+        "Oppression thoracique",
+        "Toux, surtout la nuit"
+      ],
+      "common_treatments": [
+        {
+          "name": "Corticostéroïdes inhalés",
+          "type": "Inhalateur",
+          "purpose": "Réduit l'inflammation des voies respiratoires"
+        },
+        {
+          "name": "Bronchodilatateurs",
+          "type": "Inhalateur",
+          "purpose": "Relaxe les muscles des voies respiratoires"
+        }
+      ],
+      "triggers": [
+        "Acarien de la poussière",
+        "Pollen",
+        "Exercice",
+        "Infections respiratoires",
+        "Fumée"
+      ],
+      "prevention": [
+        "Éviter les déclencheurs connus",
+        "Utiliser les inhalateurs préventifs",
+        "Surveiller les symptômes"
+      ],
+      "emergency_signs": [
+        "Essoufflement sévère",
+        "Lèvres ou visage bleus",
+        "Difficulté à parler"
+      ]
+    }
+  },
+  "chronic_kidney_disease": {
+    "en": {
+      "definition": "Chronic kidney disease (CKD) is a gradual loss of kidney function over time. Causes include diabetes, hypertension, and glomerulonephritis. CKD can lead to fluid overload, electrolyte imbalance, and increased risk of cardiovascular disease. Early detection and management are crucial to slow progression.",
+      "symptoms": [
+        "Swelling in legs and ankles",
+        "Fatigue",
+        "Frequent urination at night",
+        "Loss of appetite",
+        "Nausea"
+      ],
+      "risk_factors": [
+        "Diabetes",
+        "Hypertension",
+        "Family history",
+        "Older age"
+      ],
+      "common_treatments": [
+        {
+          "name": "ACE inhibitors",
+          "type": "Oral medication",
+          "purpose": "Control blood pressure and slow kidney damage"
+        },
+        {
+          "name": "Diet modification",
+          "type": "Non-pharmacological",
+          "purpose": "Reduce salt, protein, and potassium intake"
+        }
+      ],
+      "prevention": [
+        "Control blood sugar",
+        "Manage blood pressure",
+        "Avoid nephrotoxic drugs"
+      ],
+      "complications": [
+        "Heart disease",
+        "Anemia",
+        "Bone disease"
+      ]
+    },
+    "fr": {
+      "definition": "La maladie rénale chronique (MRC) est une perte progressive de la fonction rénale. Les causes incluent le diabète, l'hypertension et la glomérulonéphrite. La MRC peut entraîner une surcharge hydrique, des troubles électrolytiques et un risque accru de maladies cardiovasculaires. Une détection précoce et une prise en charge adaptée sont essentielles.",
+      "symptoms": [
+        "Gonflement des jambes et chevilles",
+        "Fatigue",
+        "Mictions fréquentes la nuit",
+        "Perte d'appétit",
+        "Nausées"
+      ],
+      "risk_factors": [
+        "Diabète",
+        "Hypertension",
+        "Antécédents familiaux",
+        "Âge avancé"
+      ],
+      "common_treatments": [
+        {
+          "name": "Inhibiteurs de l'enzyme de conversion",
+          "type": "Médicament oral",
+          "purpose": "Contrôler la tension et ralentir l'atteinte rénale"
+        },
+        {
+          "name": "Modification du régime alimentaire",
+          "type": "Non pharmacologique",
+          "purpose": "Réduire le sel, les protéines et le potassium"
+        }
+      ],
+      "prevention": [
+        "Contrôler la glycémie",
+        "Gérer la tension artérielle",
+        "Éviter les médicaments néphrotoxiques"
+      ],
+      "complications": [
+        "Maladie cardiaque",
+        "Anémie",
+        "Maladie osseuse"
+      ]
+    }
+  },
+  "stroke": {
+    "en": {
+      "definition": "Stroke is a medical emergency caused by interruption of blood supply to the brain, leading to cell death. Causes include blocked arteries (ischemic stroke) or bleeding (hemorrhagic stroke). Rapid treatment is essential to reduce brain damage. Prevention includes controlling blood pressure, diabetes, and avoiding smoking.",
+      "symptoms": [
+        "Sudden numbness or weakness",
+        "Confusion",
+        "Trouble speaking or understanding",
+        "Vision problems",
+        "Loss of balance"
+      ],
+      "risk_factors": [
+        "Hypertension",
+        "Diabetes",
+        "Smoking",
+        "High cholesterol",
+        "Heart disease"
+      ],
+      "common_treatments": [
+        {
+          "name": "Thrombolysis",
+          "type": "Emergency medication",
+          "purpose": "Dissolves blood clots in ischemic stroke"
+        },
+        {
+          "name": "Rehabilitation",
+          "type": "Therapy",
+          "purpose": "Restores lost functions"
+        }
+      ],
+      "prevention": [
+        "Control blood pressure",
+        "Manage diabetes",
+        "Quit smoking",
+        "Exercise regularly"
+      ],
+      "complications": [
+        "Paralysis",
+        "Speech difficulties",
+        "Memory loss"
+      ]
+    },
+    "fr": {
+      "definition": "L'AVC est une urgence médicale causée par l'interruption de l'apport sanguin au cerveau, entraînant la mort cellulaire. Les causes incluent l'obstruction des artères (AVC ischémique) ou une hémorragie (AVC hémorragique). Un traitement rapide est essentiel pour limiter les séquelles. La prévention repose sur le contrôle de la tension, du diabète et l'arrêt du tabac.",
+      "symptoms": [
+        "Engourdissement ou faiblesse soudaine",
+        "Confusion",
+        "Troubles de la parole ou de la compréhension",
+        "Problèmes de vision",
+        "Perte d'équilibre"
+      ],
+      "risk_factors": [
+        "Hypertension",
+        "Diabète",
+        "Tabagisme",
+        "Hypercholestérolémie",
+        "Maladie cardiaque"
+      ],
+      "common_treatments": [
+        {
+          "name": "Thrombolyse",
+          "type": "Traitement d'urgence",
+          "purpose": "Dissout les caillots sanguins en cas d'AVC ischémique"
+        },
+        {
+          "name": "Rééducation",
+          "type": "Thérapie",
+          "purpose": "Restaure les fonctions perdues"
+        }
+      ],
+      "prevention": [
+        "Contrôler la tension artérielle",
+        "Gérer le diabète",
+        "Arrêter de fumer",
+        "Faire de l'exercice régulièrement"
+      ],
+      "complications": [
+        "Paralysie",
+        "Troubles de la parole",
+        "Troubles de la mémoire"
+      ]
+    }
+  },
+  "coronary_artery_disease": {
+    "en": {
+      "definition": "Coronary artery disease (CAD) is the narrowing or blockage of the coronary arteries due to atherosclerosis. It can lead to chest pain (angina), heart attack, and heart failure. Risk factors include high cholesterol, hypertension, smoking, diabetes, and obesity.",
+      "symptoms": [
+        "Chest pain or discomfort",
+        "Shortness of breath",
+        "Fatigue",
+        "Heart palpitations"
+      ],
+      "risk_factors": [
+        "High cholesterol",
+        "Hypertension",
+        "Smoking",
+        "Diabetes",
+        "Obesity",
+        "Family history"
+      ],
+      "common_treatments": [
+        {
+          "name": "Statins",
+          "type": "Oral medication",
+          "purpose": "Lower cholesterol"
+        },
+        {
+          "name": "Angioplasty",
+          "type": "Procedure",
+          "purpose": "Open blocked arteries"
+        }
+      ],
+      "prevention": [
+        "Healthy diet",
+        "Regular exercise",
+        "Quit smoking",
+        "Control blood pressure"
+      ],
+      "complications": [
+        "Heart attack",
+        "Heart failure",
+        "Arrhythmia"
+      ]
+    },
+    "fr": {
+      "definition": "La maladie coronarienne est le rétrécissement ou l'obstruction des artères coronaires par l'athérosclérose. Elle peut provoquer des douleurs thoraciques (angor), un infarctus et une insuffisance cardiaque. Les facteurs de risque incluent le cholestérol élevé, l'hypertension, le tabac, le diabète et l'obésité.",
+      "symptoms": [
+        "Douleur ou gêne thoracique",
+        "Essoufflement",
+        "Fatigue",
+        "Palpitations"
+      ],
+      "risk_factors": [
+        "Cholestérol élevé",
+        "Hypertension",
+        "Tabagisme",
+        "Diabète",
+        "Obésité",
+        "Antécédents familiaux"
+      ],
+      "common_treatments": [
+        {
+          "name": "Statines",
+          "type": "Médicament oral",
+          "purpose": "Réduire le cholestérol"
+        },
+        {
+          "name": "Angioplastie",
+          "type": "Procédure",
+          "purpose": "Ouvrir les artères obstruées"
+        }
+      ],
+      "prevention": [
+        "Alimentation saine",
+        "Exercice régulier",
+        "Arrêter de fumer",
+        "Contrôler la tension"
+      ],
+      "complications": [
+        "Infarctus",
+        "Insuffisance cardiaque",
+        "Arythmie"
+      ]
+    }
+  },
+  "tuberculosis": {
+    "en": {
+      "definition": "Tuberculosis (TB) is a bacterial infection caused by Mycobacterium tuberculosis, primarily affecting the lungs but can spread to other organs. It is transmitted via airborne droplets. Early detection and treatment are essential.",
+      "symptoms": [
+        "Persistent cough",
+        "Chest pain",
+        "Coughing up blood",
+        "Fever",
+        "Night sweats",
+        "Weight loss"
+      ],
+      "risk_factors": [
+        "HIV infection",
+        "Close contact with TB patient",
+        "Poor living conditions",
+        "Malnutrition"
+      ],
+      "common_treatments": [
+        {
+          "name": "Isoniazid",
+          "type": "Antibiotic",
+          "purpose": "Kills TB bacteria"
+        },
+        {
+          "name": "Rifampicin",
+          "type": "Antibiotic",
+          "purpose": "Kills TB bacteria"
+        }
+      ],
+      "prevention": [
+        "BCG vaccination",
+        "Early detection",
+        "Good ventilation"
+      ],
+      "complications": [
+        "Lung damage",
+        "Spread to other organs"
+      ]
+    },
+    "fr": {
+      "definition": "La tuberculose est une infection bactérienne causée par Mycobacterium tuberculosis, touchant principalement les poumons mais pouvant atteindre d'autres organes. Elle se transmet par voie aérienne. La détection et le traitement précoces sont essentiels.",
+      "symptoms": [
+        "Toux persistante",
+        "Douleur thoracique",
+        "Crachat de sang",
+        "Fièvre",
+        "Sueurs nocturnes",
+        "Perte de poids"
+      ],
+      "risk_factors": [
+        "Infection VIH",
+        "Contact étroit avec un patient tuberculeux",
+        "Conditions de vie précaires",
+        "Malnutrition"
+      ],
+      "common_treatments": [
+        {
+          "name": "Isoniazide",
+          "type": "Antibiotique",
+          "purpose": "Élimine la bactérie"
+        },
+        {
+          "name": "Rifampicine",
+          "type": "Antibiotique",
+          "purpose": "Élimine la bactérie"
+        }
+      ],
+      "prevention": [
+        "Vaccination BCG",
+        "Détection précoce",
+        "Bonne aération"
+      ],
+      "complications": [
+        "Atteinte pulmonaire",
+        "Propagation à d'autres organes"
+      ]
+    }
+  },
+  "malaria": {
+    "en": {
+      "definition": "Malaria is a life-threatening disease caused by Plasmodium parasites, transmitted by Anopheles mosquitoes. It is common in tropical regions. Early diagnosis and treatment are crucial.",
+      "symptoms": [
+        "Fever",
+        "Chills",
+        "Sweats",
+        "Headache",
+        "Nausea",
+        "Muscle pain"
+      ],
+      "risk_factors": [
+        "Living in endemic area",
+        "No mosquito protection",
+        "Travel to tropical regions"
+      ],
+      "common_treatments": [
+        {
+          "name": "Artemisinin-based combination therapy",
+          "type": "Antimalarial",
+          "purpose": "Kills malaria parasites"
+        }
+      ],
+      "prevention": [
+        "Mosquito nets",
+        "Insect repellent",
+        "Prophylactic medication"
+      ],
+      "complications": [
+        "Anemia",
+        "Organ failure",
+        "Death"
+      ]
+    },
+    "fr": {
+      "definition": "Le paludisme est une maladie potentiellement mortelle causée par des parasites du genre Plasmodium, transmis par les moustiques Anopheles. Il est fréquent dans les régions tropicales. Le diagnostic et le traitement précoces sont essentiels.",
+      "symptoms": [
+        "Fièvre",
+        "Frissons",
+        "Sueurs",
+        "Maux de tête",
+        "Nausées",
+        "Douleurs musculaires"
+      ],
+      "risk_factors": [
+        "Vie en zone endémique",
+        "Absence de protection contre les moustiques",
+        "Voyage en région tropicale"
+      ],
+      "common_treatments": [
+        {
+          "name": "Thérapie à base d'artémisinine",
+          "type": "Antipaludique",
+          "purpose": "Élimine les parasites"
+        }
+      ],
+      "prevention": [
+        "Moustiquaires",
+        "Répulsif",
+        "Médicaments prophylactiques"
+      ],
+      "complications": [
+        "Anémie",
+        "Défaillance d'organes",
+        "Décès"
+      ]
+    }
+  },
+  "hepatitis_b": {
+    "en": {
+      "definition": "Hepatitis B is a viral infection that attacks the liver and can cause both acute and chronic disease. It is transmitted through blood and bodily fluids. Vaccination is the best prevention.",
+      "symptoms": [
+        "Jaundice",
+        "Fatigue",
+        "Abdominal pain",
+        "Loss of appetite",
+        "Dark urine"
+      ],
+      "risk_factors": [
+        "Unprotected sex",
+        "Sharing needles",
+        "Mother-to-child transmission"
+      ],
+      "common_treatments": [
+        {
+          "name": "Antiviral medications",
+          "type": "Oral medication",
+          "purpose": "Suppress virus replication"
+        }
+      ],
+      "prevention": [
+        "Vaccination",
+        "Safe sex",
+        "Avoid sharing needles"
+      ],
+      "complications": [
+        "Liver cirrhosis",
+        "Liver cancer"
+      ]
+    },
+    "fr": {
+      "definition": "L'hépatite B est une infection virale qui attaque le foie et peut provoquer une maladie aiguë ou chronique. Elle se transmet par le sang et les liquides corporels. La vaccination est la meilleure prévention.",
+      "symptoms": [
+        "Jaunisse",
+        "Fatigue",
+        "Douleur abdominale",
+        "Perte d'appétit",
+        "Urines foncées"
+      ],
+      "risk_factors": [
+        "Rapports sexuels non protégés",
+        "Partage de seringues",
+        "Transmission mère-enfant"
+      ],
+      "common_treatments": [
+        {
+          "name": "Antiviraux",
+          "type": "Médicament oral",
+          "purpose": "Supprime la réplication virale"
+        }
+      ],
+      "prevention": [
+        "Vaccination",
+        "Sexe protégé",
+        "Ne pas partager les seringues"
+      ],
+      "complications": [
+        "Cirrhose du foie",
+        "Cancer du foie"
+      ]
+    }
+  },
+  "depression": {
+    "en": {
+      "definition": "Depression is a common mental disorder characterized by persistent sadness, loss of interest, and inability to carry out daily activities. It can be caused by genetic, biological, environmental, and psychological factors.",
+      "symptoms": [
+        "Persistent sadness",
+        "Loss of interest",
+        "Fatigue",
+        "Sleep disturbances",
+        "Difficulty concentrating"
+      ],
+      "risk_factors": [
+        "Family history",
+        "Chronic illness",
+        "Stressful life events"
+      ],
+      "common_treatments": [
+        {
+          "name": "Antidepressants",
+          "type": "Oral medication",
+          "purpose": "Improve mood"
+        },
+        {
+          "name": "Psychotherapy",
+          "type": "Therapy",
+          "purpose": "Support and coping strategies"
+        }
+      ],
+      "prevention": [
+        "Stress management",
+        "Social support",
+        "Healthy lifestyle"
+      ],
+      "complications": [
+        "Suicidal thoughts",
+        "Social isolation"
+      ]
+    },
+    "fr": {
+      "definition": "La dépression est un trouble mental fréquent caractérisé par une tristesse persistante, une perte d'intérêt et une incapacité à accomplir les activités quotidiennes. Elle peut être causée par des facteurs génétiques, biologiques, environnementaux et psychologiques.",
+      "symptoms": [
+        "Tristesse persistante",
+        "Perte d'intérêt",
+        "Fatigue",
+        "Troubles du sommeil",
+        "Difficulté de concentration"
+      ],
+      "risk_factors": [
+        "Antécédents familiaux",
+        "Maladie chronique",
+        "Événements stressants"
+      ],
+      "common_treatments": [
+        {
+          "name": "Antidépresseurs",
+          "type": "Médicament oral",
+          "purpose": "Améliore l'humeur"
+        },
+        {
+          "name": "Psychothérapie",
+          "type": "Thérapie",
+          "purpose": "Soutien et stratégies d'adaptation"
+        }
+      ],
+      "prevention": [
+        "Gestion du stress",
+        "Soutien social",
+        "Mode de vie sain"
+      ],
+      "complications": [
+        "Idées suicidaires",
+        "Isolement social"
+      ]
+    }
+  },
+  "covid19": {
+    "en": {
+      "definition": "COVID-19 is a respiratory illness caused by the SARS-CoV-2 virus. It spreads mainly through respiratory droplets. Symptoms range from mild to severe and can include fever, cough, and difficulty breathing.",
+      "symptoms": [
+        "Fever",
+        "Cough",
+        "Shortness of breath",
+        "Loss of taste or smell",
+        "Fatigue"
+      ],
+      "risk_factors": [
+        "Older age",
+        "Chronic diseases",
+        "Immunosuppression"
+      ],
+      "common_treatments": [
+        {
+          "name": "Supportive care",
+          "type": "General",
+          "purpose": "Relieve symptoms"
+        },
+        {
+          "name": "Antivirals",
+          "type": "Medication",
+          "purpose": "Reduce viral replication"
+        }
+      ],
+      "prevention": [
+        "Vaccination",
+        "Hand hygiene",
+        "Mask wearing",
+        "Physical distancing"
+      ],
+      "complications": [
+        "Pneumonia",
+        "Respiratory failure",
+        "Long COVID"
+      ]
+    },
+    "fr": {
+      "definition": "La COVID-19 est une maladie respiratoire causée par le virus SARS-CoV-2. Elle se transmet principalement par les gouttelettes respiratoires. Les symptômes vont de légers à graves et incluent fièvre, toux et difficultés respiratoires.",
+      "symptoms": [
+        "Fièvre",
+        "Toux",
+        "Essoufflement",
+        "Perte de goût ou d'odorat",
+        "Fatigue"
+      ],
+      "risk_factors": [
+        "Âge avancé",
+        "Maladies chroniques",
+        "Immunodépression"
+      ],
+      "common_treatments": [
+        {
+          "name": "Soins de support",
+          "type": "Général",
+          "purpose": "Soulager les symptômes"
+        },
+        {
+          "name": "Antiviraux",
+          "type": "Médicament",
+          "purpose": "Réduire la réplication virale"
+        }
+      ],
+      "prevention": [
+        "Vaccination",
+        "Hygiène des mains",
+        "Port du masque",
+        "Distanciation physique"
+      ],
+      "complications": [
+        "Pneumonie",
+        "Insuffisance respiratoire",
+        "COVID long"
+      ]
+    }
+  },
+  "breast_cancer": {
+    "en": {
+      "definition": "Breast cancer is a malignant tumor that develops from breast cells. It is one of the most common cancers in women. Early detection through screening improves outcomes.",
+      "symptoms": [
+        "Breast lump",
+        "Change in breast shape",
+        "Nipple discharge",
+        "Skin changes"
+      ],
+      "risk_factors": [
+        "Female gender",
+        "Older age",
+        "Family history",
+        "Hormonal factors"
+      ],
+      "common_treatments": [
+        {
+          "name": "Surgery",
+          "type": "Procedure",
+          "purpose": "Remove tumor"
+        },
+        {
+          "name": "Chemotherapy",
+          "type": "Medication",
+          "purpose": "Kill cancer cells"
+        }
+      ],
+      "prevention": [
+        "Regular screening",
+        "Healthy lifestyle"
+      ],
+      "complications": [
+        "Metastasis",
+        "Recurrence"
+      ]
+    },
+    "fr": {
+      "definition": "Le cancer du sein est une tumeur maligne qui se développe à partir des cellules du sein. C'est l'un des cancers les plus fréquents chez la femme. Le dépistage précoce améliore le pronostic.",
+      "symptoms": [
+        "Masse dans le sein",
+        "Modification de la forme du sein",
+        "Écoulement du mamelon",
+        "Altérations cutanées"
+      ],
+      "risk_factors": [
+        "Sexe féminin",
+        "Âge avancé",
+        "Antécédents familiaux",
+        "Facteurs hormonaux"
+      ],
+      "common_treatments": [
+        {
+          "name": "Chirurgie",
+          "type": "Procédure",
+          "purpose": "Retirer la tumeur"
+        },
+        {
+          "name": "Chimiothérapie",
+          "type": "Médicament",
+          "purpose": "Détruire les cellules cancéreuses"
+        }
+      ],
+      "prevention": [
+        "Dépistage régulier",
+        "Mode de vie sain"
+      ],
+      "complications": [
+        "Métastases",
+        "Récidive"
+      ]
+    }
+  },
+  "prostate_cancer": {
+    "en": {
+      "definition": "Prostate cancer is a malignant tumor of the prostate gland, common in older men. Early stages may be asymptomatic. Screening and early treatment improve survival.",
+      "symptoms": [
+        "Difficulty urinating",
+        "Frequent urination",
+        "Blood in urine",
+        "Pelvic pain"
+      ],
+      "risk_factors": [
+        "Older age",
+        "Family history",
+        "African ancestry"
+      ],
+      "common_treatments": [
+        {
+          "name": "Surgery",
+          "type": "Procedure",
+          "purpose": "Remove tumor"
+        },
+        {
+          "name": "Radiation therapy",
+          "type": "Procedure",
+          "purpose": "Destroy cancer cells"
+        }
+      ],
+      "prevention": [
+        "Regular screening",
+        "Healthy diet"
+      ],
+      "complications": [
+        "Metastasis",
+        "Urinary incontinence"
+      ]
+    },
+    "fr": {
+      "definition": "Le cancer de la prostate est une tumeur maligne de la prostate, fréquente chez l'homme âgé. Les premiers stades peuvent être asymptomatiques. Le dépistage et le traitement précoce améliorent la survie.",
+      "symptoms": [
+        "Difficulté à uriner",
+        "Mictions fréquentes",
+        "Sang dans les urines",
+        "Douleur pelvienne"
+      ],
+      "risk_factors": [
+        "Âge avancé",
+        "Antécédents familiaux",
+        "Origine africaine"
+      ],
+      "common_treatments": [
+        {
+          "name": "Chirurgie",
+          "type": "Procédure",
+          "purpose": "Retirer la tumeur"
+        },
+        {
+          "name": "Radiothérapie",
+          "type": "Procédure",
+          "purpose": "Détruire les cellules cancéreuses"
+        }
+      ],
+      "prevention": [
+        "Dépistage régulier",
+        "Alimentation saine"
+      ],
+      "complications": [
+        "Métastases",
+        "Incontinence urinaire"
+      ]
+    }
+  },
+  "sickle_cell_disease": {
+    "en": {
+      "definition": "Sickle cell disease is a genetic blood disorder causing abnormal hemoglobin, leading to sickle-shaped red blood cells. It results in anemia, pain crises, and organ damage.",
+      "symptoms": [
+        "Fatigue",
+        "Pain episodes",
+        "Swelling in hands and feet",
+        "Frequent infections"
+      ],
+      "risk_factors": [
+        "Family history",
+        "African ancestry"
+      ],
+      "common_treatments": [
+        {
+          "name": "Hydroxyurea",
+          "type": "Oral medication",
+          "purpose": "Reduce pain crises"
+        },
+        {
+          "name": "Blood transfusions",
+          "type": "Procedure",
+          "purpose": "Treat anemia"
+        }
+      ],
+      "prevention": [
+        "Genetic counseling"
+      ],
+      "complications": [
+        "Stroke",
+        "Organ damage"
+      ]
+    },
+    "fr": {
+      "definition": "La drépanocytose est une maladie génétique du sang provoquant une hémoglobine anormale et des globules rouges en forme de faucille. Elle entraîne une anémie, des crises douloureuses et des atteintes d'organes.",
+      "symptoms": [
+        "Fatigue",
+        "Crises douloureuses",
+        "Gonflement des mains et pieds",
+        "Infections fréquentes"
+      ],
+      "risk_factors": [
+        "Antécédents familiaux",
+        "Origine africaine"
+      ],
+      "common_treatments": [
+        {
+          "name": "Hydroxyurée",
+          "type": "Médicament oral",
+          "purpose": "Réduit les crises douloureuses"
+        },
+        {
+          "name": "Transfusions sanguines",
+          "type": "Procédure",
+          "purpose": "Traiter l'anémie"
+        }
+      ],
+      "prevention": [
+        "Conseil génétique"
+      ],
+      "complications": [
+        "AVC",
+        "Atteinte d'organes"
+      ]
+    }
+  },
+  "migraine": {
+    "en": {
+      "definition": "Migraine is a neurological disorder characterized by recurrent headaches, often accompanied by nausea, vomiting, and sensitivity to light or sound. Triggers include stress, certain foods, and hormonal changes.",
+      "symptoms": [
+        "Throbbing headache",
+        "Nausea",
+        "Vomiting",
+        "Sensitivity to light",
+        "Sensitivity to sound"
+      ],
+      "risk_factors": [
+        "Family history",
+        "Female gender",
+        "Hormonal changes"
+      ],
+      "common_treatments": [
+        {
+          "name": "Triptans",
+          "type": "Oral medication",
+          "purpose": "Relieve migraine attacks"
+        },
+        {
+          "name": "Preventive medications",
+          "type": "Oral medication",
+          "purpose": "Reduce frequency"
+        }
+      ],
+      "prevention": [
+        "Avoid triggers",
+        "Regular sleep",
+        "Stress management"
+      ],
+      "complications": [
+        "Chronic migraine",
+        "Medication overuse headache"
+      ]
+    },
+    "fr": {
+      "definition": "La migraine est un trouble neurologique caractérisé par des céphalées récurrentes, souvent accompagnées de nausées, vomissements et sensibilité à la lumière ou au bruit. Les déclencheurs incluent le stress, certains aliments et les variations hormonales.",
+      "symptoms": [
+        "Céphalée pulsatile",
+        "Nausées",
+        "Vomissements",
+        "Sensibilité à la lumière",
+        "Sensibilité au bruit"
+      ],
+      "risk_factors": [
+        "Antécédents familiaux",
+        "Sexe féminin",
+        "Variations hormonales"
+      ],
+      "common_treatments": [
+        {
+          "name": "Triptans",
+          "type": "Médicament oral",
+          "purpose": "Soulager les crises"
+        },
+        {
+          "name": "Traitements préventifs",
+          "type": "Médicament oral",
+          "purpose": "Réduire la fréquence"
+        }
+      ],
+      "prevention": [
+        "Éviter les déclencheurs",
+        "Sommeil régulier",
+        "Gestion du stress"
+      ],
+      "complications": [
+        "Migraine chronique",
+        "Céphalée par surconsommation de médicaments"
+      ]
     }
   }
 }

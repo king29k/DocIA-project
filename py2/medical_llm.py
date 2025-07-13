@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import json
-from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+from transformers import AutoModelForCausalLM, AutoTokenizer
 from sentence_transformers import SentenceTransformer
 import torch
 from typing import Literal
@@ -10,16 +10,19 @@ from typing import Literal
 app = FastAPI()
 
 # Load medical KB
-with open("medical_kb.json", "r") as f:
+with open("medical_kb.json.json", "r", encoding="utf-8") as f:
     MEDICAL_KB = json.load(f)
+
+# Device selection
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Initialize Mistral (run on GPU if available)
 model_name = "mistralai/Mistral-7B-v0.1"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(
     model_name,
-    torch_dtype=torch.float16,
-    device_map="auto"  # Automatically uses GPU if available
+    torch_dtype=torch.float16 if DEVICE == "cuda" else torch.float32,
+    device_map="auto" if DEVICE == "cuda" else None
 )
 
 # Initialize embeddings model
@@ -58,7 +61,7 @@ def retrieve_medical_context(query: str, language: str) -> str:
 
 def generate_safe_response(prompt: str) -> str:
     """Generate response with Mistral using guardrails"""
-    inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
+    inputs = tokenizer(prompt, return_tensors="pt").to(DEVICE)
     outputs = model.generate(
         **inputs,
         max_new_tokens=150,
